@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.lang.String;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Task {
 
@@ -47,51 +49,19 @@ public class Task {
                 Integer.toString(a);
         this.completata = false;
     }
-    
-    public Task() throws IOException{
-        
+
+
+    public static List<Task> getTasks() throws IOException {
         String fileContent = Files.readString(Path.of("Task.csv"));
-        char[] c = fileContent.toCharArray();
+        String[] fileLines = fileContent.split("\n");
+        String[] fileCamps = fileContent.split(",|\n");
+        List<Task> taskList = new ArrayList<Task>();
 
-        String[] params = new String[3];
-        StringBuilder param = new StringBuilder();
-        
-        try{
-            for(int i = fileContent.length()-1, cont = 0; c[i] != '\n'; i--){
-                if (c[i] == ','){
-                    param.reverse();
-                    params[cont] = param.toString();
-                    param.delete(0, param.length());
-                    cont++;
-                }else{
-                    param.append(c[i]);
-                }
-            }
-            param.reverse();
-            params[2] = param.toString();
-
-            this.descrizione = params[2];
-            this.dataOra = params[1];
-            this.completata = false;
-        
-        
-        
-            StringBuilder Tfile = new StringBuilder();
-            int i = fileContent.length()-1;
-            for (; c[i] != '\n'; i--){}
-
-            Tfile.append(fileContent, 0, i);
-            
-        
-            FileWriter file = new FileWriter("Task.csv", false);
-            file.write(Tfile.toString());
-            file.close();
-            
-        } catch (FileNotFoundException e) {
-            System.err.println("FileNotFound");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Non ci sono piu Task salvate");
+        for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 3){
+            taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1])));
         }
+
+        return taskList;
     }
     
     
@@ -215,7 +185,14 @@ public class Task {
 
     @Override
     public String toString() {
-        return  descrizione + "\t\t" +
+        return  descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t\t\t\t\t" :
+                (descrizione.length() < 8 ?"\t\t\t\t\t\t\t\t" :
+                    (descrizione.length() < 12 ? "\t\t\t\t\t\t\t" :
+                        (descrizione.length() < 16 ? "\t\t\t\t\t\t" :
+                            (descrizione.length() < 20 ? "\t\t\t\t\t" :
+                                (descrizione.length() < 24 ? "\t\t\t\t" :
+                                    (descrizione.length() < 28 ? "\t\t\t" :
+                                        (descrizione.length() < 32 ? "\t\t" : "\t")))))))) +
                 dataOra + "\t" +
                 completata;
     }

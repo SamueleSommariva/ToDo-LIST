@@ -1,5 +1,6 @@
 package mainclasses;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,15 +13,16 @@ public class Utente {
     
     
     public Utente() throws IOException{
-        Task task;
-        for (int i = 0; Task.altreTask(); i++){
-            taskList.add(new Task());
-        }
+        taskList = Task.getTasks();
     }   
     
     public void salvaTasks() throws IOException{
-        for(int i = taskList.size(); i > 0; i--){
-            taskList.get(taskList.size()-1).salvaTask();
+        FileWriter file = new FileWriter("Task.csv");
+        file.write("");
+        Task t;
+        for(int i = 0; i < taskList.size(); i++){
+            t = taskList.get(i);
+            t.salvaTask();
         }
     }
     
@@ -72,7 +74,7 @@ public class Utente {
                             + "mktask\t\t" +      "Crea task es (mktask desc hh/gg/mm/aaaa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
                             + "completed\t" +     "Completare/eseguire la task N (show)\n"
-                            + "rm\t\t" +            "Elimina la task N (show)\n");
+                            + "rm\t\t\t" +            "Elimina la task N (show)\n");
                     break;
                 case "rm":
                     taskList.remove(new Integer(cmd[1].toString())-1);
@@ -93,7 +95,7 @@ public class Utente {
     public String toString(){
         StringBuilder s = new StringBuilder();
         int i = 1;
-        s.append("N  DESC.\tDATE\t\tCOMPLETE\n");
+        s.append("N  DESC.\t\t\t\t\t\t\t\tDATE\t\tCOMPLETE\n");
         for (Task task : taskList){
             s.append(i +") " + task.toString() + '\n');
             i++;
