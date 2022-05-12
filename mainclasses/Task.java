@@ -14,8 +14,9 @@ public class Task {
     String descrizione;
     String dataOra;         //      hh/gg/mm/aaaa
     boolean completata;
+    Double periodicita;
 
-    public Task(String descrizione, int h, int g, int m, int a){
+    public Task(String descrizione, int h, int g, int m, int a, Double periodicita){
         this.descrizione = descrizione;
         if (h <= 1){
             h = 1;
@@ -47,6 +48,7 @@ public class Task {
                 Integer.toString(g) + '/' +
                 Integer.toString(m) + '/' +
                 Integer.toString(a);
+        this.periodicita = periodicita;
         this.completata = false;
     }
 
@@ -57,8 +59,8 @@ public class Task {
         String[] fileCamps = fileContent.split(",|\n");
         List<Task> taskList = new ArrayList<Task>();
 
-        for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 3){
-            taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1])));
+        for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 4){ // ADSASDASDASDASDASD
+            taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1]), Double.parseDouble(fileCamps[c+2])));
         }
 
         return taskList;
@@ -143,10 +145,6 @@ public class Task {
         int anno = new Integer(annoS.toString());
         return anno;
     }
-    public static boolean altreTask() throws IOException{
-        String fileContent = Files.readString(Path.of("Task.csv"));
-        return fileContent.length() > 1;
-    }
 
     
     public void completata() {
@@ -157,7 +155,7 @@ public class Task {
         if (!getCompletata()){
             try{
                 FileWriter file = new FileWriter("Task.csv", true);
-                file.write("\n" + this.descrizione + "," + this.dataOra + "," + this.completata);
+                file.write("\n" + this.descrizione + "," + this.dataOra + "," + this.periodicita + "," + this.completata);
                 file.close();
             
             } catch (FileNotFoundException e) {
@@ -166,7 +164,14 @@ public class Task {
         }
     }
 
-    
+    public double getPeriodicita() {
+        return periodicita;
+    }
+
+    public void setPeriodicita(double periodicita) {
+        this.periodicita = periodicita;
+    }
+
     public String getDescrizione() {
         return descrizione;
     }
@@ -194,6 +199,7 @@ public class Task {
                                     (descrizione.length() < 28 ? "\t\t\t" :
                                         (descrizione.length() < 32 ? "\t\t" : "\t")))))))) +
                 dataOra + "\t" +
+                (periodicita == 0.0 ? "NO" : periodicita) + "\t\t\t\t" +
                 completata;
     }
 }
