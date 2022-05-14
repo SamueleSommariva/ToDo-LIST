@@ -59,7 +59,7 @@ public class Task {
         String[] fileCamps = fileContent.split(",|\n");
         List<Task> taskList = new ArrayList<Task>();
 
-        for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 4){ // ADSASDASDASDASDASD
+        for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 4){
             taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1]), Double.parseDouble(fileCamps[c+2])));
         }
 
