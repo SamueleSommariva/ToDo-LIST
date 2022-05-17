@@ -14,9 +14,9 @@ public class Task {
     String descrizione;
     String dataOra;         //      hh/gg/mm/aaaa
     boolean completata;
-    Double periodicita;
+    String periodicita;
 
-    public Task(String descrizione, int h, int g, int m, int a, Double periodicita){
+    public Task(String descrizione, int h, int g, int m, int a, String periodicita){
         this.descrizione = descrizione;
         if (h <= 1){
             h = 1;
@@ -60,7 +60,7 @@ public class Task {
         List<Task> taskList = new ArrayList<Task>();
 
         for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 4){
-            taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1]), Double.parseDouble(fileCamps[c+2])));
+            taskList.add(new Task(fileCamps[c], Task.ora(fileCamps[c+1]), Task.giorno(fileCamps[c+1]), Task.mese(fileCamps[c+1]), Task.anno(fileCamps[c+1]), fileCamps[c+2]));
         }
 
         return taskList;
@@ -148,7 +148,38 @@ public class Task {
 
     
     public void completata() {
-        this.completata = true;
+        if (this.periodicita == "00/00/00/0000") {
+            this.completata = true;
+        }else{
+            int ora = ora(this.periodicita) + ora(this.dataOra);
+            int giorno = giorno(this.periodicita) + giorno(this.dataOra);
+            int mese = mese(this.periodicita) + mese(this.dataOra);
+            int anno = anno(this.periodicita) + anno(this.dataOra);
+            int guardia = 0;
+            while (guardia != 3){
+                guardia = 0;
+                if (ora > 24){
+                    ora -= 24;
+                    giorno++;
+                }else{
+                    guardia++;
+                }
+                if (giorno > 31){
+                    giorno -= 31;
+                    mese++;
+                }else{
+                    guardia++;
+                }
+                if (mese > 12){
+                    mese -= 12;
+                    anno++;
+                }else{
+                    guardia++;
+                }
+            }
+            StringBuilder data = new StringBuilder(ora + "/" + giorno + "/" + mese + "/" + anno);
+            this.dataOra = data.toString();
+        }
     }
 
     public void salvaTask() throws IOException{
@@ -164,11 +195,11 @@ public class Task {
         }
     }
 
-    public double getPeriodicita() {
+    public String getPeriodicita() {
         return periodicita;
     }
 
-    public void setPeriodicita(double periodicita) {
+    public void setPeriodicita(String periodicita) {
         this.periodicita = periodicita;
     }
 
@@ -190,16 +221,16 @@ public class Task {
 
     @Override
     public String toString() {
-        return  descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t\t\t\t\t" :
-                (descrizione.length() < 8 ?"\t\t\t\t\t\t\t\t" :
-                    (descrizione.length() < 12 ? "\t\t\t\t\t\t\t" :
-                        (descrizione.length() < 16 ? "\t\t\t\t\t\t" :
-                            (descrizione.length() < 20 ? "\t\t\t\t\t" :
-                                (descrizione.length() < 24 ? "\t\t\t\t" :
-                                    (descrizione.length() < 28 ? "\t\t\t" :
-                                        (descrizione.length() < 32 ? "\t\t" : "\t")))))))) +
+        return  descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t\t\t\t" :
+                (descrizione.length() < 8 ?"\t\t\t\t\t\t\t" :
+                    (descrizione.length() < 12 ? "\t\t\t\t\t\t" :
+                        (descrizione.length() < 16 ? "\t\t\t\t\t" :
+                            (descrizione.length() < 20 ? "\t\t\t\t" :
+                                (descrizione.length() < 24 ? "\t\t\t" :
+                                    (descrizione.length() < 28 ? "\t\t" :
+                                        (descrizione.length() < 32 ? "\t" : "\t")))))))) +
                 dataOra + "\t" +
-                (periodicita == 0.0 ? "NO" : periodicita) + "\t\t\t\t" +
+                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t\t" +
                 completata;
     }
 }

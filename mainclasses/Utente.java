@@ -36,14 +36,14 @@ public class Utente {
                                     Task.giorno(cmd[2]),
                                     Task.mese(cmd[2]),
                                     Task.anno(cmd[2]),
-                                    Double.parseDouble(cmd[3])));
+                                    cmd[3]));
                         }catch (ArrayIndexOutOfBoundsException ae){
                             try {
                                 taskList.add(new Task(cmd[1],   Task.ora(cmd[2]),
                                         Task.giorno(cmd[2]),
                                         Task.mese(cmd[2]),
                                         Task.anno(cmd[2]),
-                                        0.0));
+                                        "00/00/00/0000"));
                             }catch (Exception e){
                                 System.out.println("\nInvalid command or params...\nType help for more.");
                             }
@@ -89,7 +89,7 @@ public class Utente {
                     System.out.println("INFO COMMANDS:\n"
                             + "help\t\t" +        "Info comandi.\n"
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
-                            + "mktask\t\t" +      "Crea task es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask p desc hh/gg/mm/aaaa p).\n"
+                            + "mktask\t\t" +      "Crea task es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
                             + "completed\t" +     "Completare/eseguire la task N (show)\n"
                             + "rm\t\t\t" +        "Elimina la task N (show)\n");
