@@ -1,26 +1,28 @@
 package mainclasses;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Utente {
-    
+
     List<Task> taskList = new ArrayList<Task>();
 
     
     
     public Utente() throws IOException{
-        Task task;
-        for (int i = 0; Task.altreTask(); i++){
-            taskList.add(new Task());
-        }
+        taskList = Task.getTasks();
     }   
     
     public void salvaTasks() throws IOException{
-        for(int i = taskList.size(); i > 0; i--){
-            taskList.get(taskList.size()-1).salvaTask();
+        FileWriter file = new FileWriter("Task.csv");
+        file.write("");
+        Task t;
+        for(int i = 0; i < taskList.size(); i++){
+            t = taskList.get(i);
+            t.salvaTask();
         }
     }
     
@@ -29,11 +31,27 @@ public class Utente {
             String[] cmd = command.split(" ");
             switch (cmd[0]) {
                 case "mktask":
-                    taskList.add(new Task(cmd[1],   Task.ora(cmd[2]), 
-                                                        Task.giorno(cmd[2]), 
-                                                        Task.mese(cmd[2]), 
-                                                        Task.anno(cmd[2])));
-                    break;
+                        try{
+                            taskList.add(new Task(cmd[1],   Task.ora(cmd[2]),
+                                    Task.giorno(cmd[2]),
+                                    Task.mese(cmd[2]),
+                                    Task.anno(cmd[2]),
+                                    Double.parseDouble(cmd[3])));
+                        }catch (ArrayIndexOutOfBoundsException ae){
+                            try {
+                                taskList.add(new Task(cmd[1],   Task.ora(cmd[2]),
+                                        Task.giorno(cmd[2]),
+                                        Task.mese(cmd[2]),
+                                        Task.anno(cmd[2]),
+                                        0.0));
+                            }catch (Exception e){
+                                System.out.println("\nInvalid command or params...\nType help for more.");
+                            }
+                        }
+                        break;
+
+
+
                 case "show":
                     System.out.println(this.toString());
                     break;
@@ -45,7 +63,8 @@ public class Utente {
                                         Task.ora(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
                                         Task.giorno(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
                                         Task.mese(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
-                                        Task.anno(taskList.get(new Integer(cmd[1].toString())).getDataOra())));
+                                        Task.anno(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
+                                        taskList.get(new Integer(cmd[1].toString())).getPeriodicita()));
                                 break;
                             case "date":
                                 taskList.set(new Integer(cmd[1].toString()), 
@@ -53,7 +72,8 @@ public class Utente {
                                         Task.ora(cmd[2]),
                                         Task.giorno(cmd[2]),
                                         Task.mese(cmd[2]),
-                                        Task.anno(cmd[2])));
+                                        Task.anno(cmd[2]),
+                                        taskList.get(new Integer(cmd[1].toString())).getPeriodicita()));
                                 break;
                             default:
                                 System.out.println("\nInvalid command or params...\nType help for more.");
@@ -69,14 +89,16 @@ public class Utente {
                     System.out.println("INFO COMMANDS:\n"
                             + "help\t\t" +        "Info comandi.\n"
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
-                            + "mktask\t\t" +      "Crea task es (mktask desc hh/gg/mm/aaaa).\n"
+                            + "mktask\t\t" +      "Crea task es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask p desc hh/gg/mm/aaaa p).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
                             + "completed\t" +     "Completare/eseguire la task N (show)\n"
-                            + "rm\t\t" +            "Elimina la task N (show)\n");
+                            + "rm\t\t\t" +        "Elimina la task N (show)\n");
                     break;
                 case "rm":
                     taskList.remove(new Integer(cmd[1].toString())-1);
                     System.out.println("Deleted Task N: " + cmd[1]);
+                    break;
+                case "":
                     break;
                 default:
                     System.out.println("\nInvalid command or params...\nType help for more.");
@@ -93,7 +115,7 @@ public class Utente {
     public String toString(){
         StringBuilder s = new StringBuilder();
         int i = 1;
-        s.append("N  DESC.\tDATE\t\tCOMPLETE\n");
+        s.append("N  DESC.\t\t\t\t\t\t\tDATE\t\tPERIODICITY\t\tCOMPLETE\n");
         for (Task task : taskList){
             s.append(i +") " + task.toString() + '\n');
             i++;
