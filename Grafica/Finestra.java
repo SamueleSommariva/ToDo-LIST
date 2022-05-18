@@ -23,7 +23,7 @@ public class Finestra {
 
 
         //Icona
-        ImageIcon image = new ImageIcon("Immagini\\TodoTest.png");                                              //Creo immagine             //Trovare nuova immagine 250x250px
+        ImageIcon image = new ImageIcon("ImmaginiToDo\\ToDo_LIst-Logo.png");                                              //Creo immagine             //Trovare nuova immagine 250x250px
         frame.setIconImage(image.getImage());
     }
 

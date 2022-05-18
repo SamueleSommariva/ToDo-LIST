@@ -54,7 +54,7 @@ public class Task {
 
 
     public static List<Task> getTasks() throws IOException {
-        String fileContent = Files.readString(Path.of("Task.csv"));
+        String fileContent = Files.readString(Path.of("CSV/Task.csv"));
         String[] fileLines = fileContent.split("\n");
         String[] fileCamps = fileContent.split(",|\n");
         List<Task> taskList = new ArrayList<Task>();
@@ -185,7 +185,7 @@ public class Task {
     public void salvaTask() throws IOException{
         if (!getCompletata()){
             try{
-                FileWriter file = new FileWriter("Task.csv", true);
+                FileWriter file = new FileWriter("CSV/Task.csv", true);
                 file.write("\n" + this.descrizione + "," + this.dataOra + "," + this.periodicita + "," + this.completata);
                 file.close();
             
