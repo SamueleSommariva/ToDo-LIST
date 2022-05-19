@@ -17,7 +17,7 @@ public class Utente {
         taskList = Task.getTasks();
     }   
     
-    public void salvaTasks() throws IOException{
+    public void salvaTasks() throws IOException{                //Sovrascrive il file con la lista
         FileWriter file = new FileWriter("Task.csv");
         file.write("");
         Task t;

@@ -12,6 +12,7 @@ import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.Color;
 
+
 public class Finestra {
 
     public void usaFrame(){
@@ -35,7 +36,6 @@ public class Finestra {
         JPanel panel = new JPanel ();
         frame.setContentPane ( panel );
 
-
         try
         {
             UIManager.setLookAndFeel
@@ -53,6 +53,12 @@ public class Finestra {
 
         frame.setVisible (true);
 
+
+
+        JPanel posizionePulsanti = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton bottoneTask = new JButton("Crea Task");
+        posizionePulsanti.add(bottoneTask);
+        frame.add(posizionePulsanti, BorderLayout.WEST);
     }
 
 }
