@@ -1,10 +1,25 @@
-package todolist;
+package ToDoList;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
+
+import Grafica.Finestra;
+import com.formdev.flatlaf.FlatDarkLaf;
 import mainclasses.Utente;
+
+//Import Grafica
+import javax.swing.*;
 
 public class ToDoList {
     public static void main(String[] args) throws IOException {
+
+
+        //Finestra                                                                                                      //Creata classe finestra con all'interno tutta la parte grafica
+        Finestra fin = new Finestra();
+        fin.usaFrame();
+
+
+        //Parte funzionale
         Utente utente = new Utente();
         Scanner sc = new Scanner(System.in);
         String cmd = "";
@@ -19,7 +34,7 @@ public class ToDoList {
                     utente.runCmd(cmd);
             }
         }
-        
+
     }
-    
+
 }
