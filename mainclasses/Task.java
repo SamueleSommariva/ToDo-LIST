@@ -233,5 +233,4 @@ public class Task {
                 (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t\t" +
                 completata;
     }
-
 }
