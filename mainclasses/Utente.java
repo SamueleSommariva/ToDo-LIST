@@ -21,13 +21,13 @@ public class Utente {
         FileWriter file = new FileWriter("Task.csv");
         file.write("");
         Task t;
-        for(int i = 0; i < taskList.size(); i++){
+        for(int i = 0; i < taskList.size(); i++){               //Chiama il metodo salvaTask per ogni task della taskList
             t = taskList.get(i);
             t.salvaTask();
         }
     }
     
-    public void runCmd(String command){
+    public void runCmd(String command){                         //Esegue i comandi inseriti nella CLI
         try{
             String[] cmd = command.split(" ");
             switch (cmd[0]) {
@@ -113,8 +113,8 @@ public class Utente {
     }
     
     
-    public String toString(){
-        StringBuilder s = new StringBuilder();
+    public String toString(){                                                   //Esegue il toString delle tasks suddividendo gli attributi
+        StringBuilder s = new StringBuilder();                                  //Viene usato nel comando "show"
         int i = 1;
         s.append("N  DESC.\t\t\t\t\t\t\tDATE\t\tPERIODICITY\t\tCOMPLETE\n");
         for (Task task : taskList){
