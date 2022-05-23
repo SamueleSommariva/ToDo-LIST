@@ -153,7 +153,7 @@ public class Task {
 
     
     public void completata() {
-        if (this.periodicita == "00/00/00/0000") {                          //Se la periodicità è nulla ("00/00/00/0000") imposta completata a true
+        if (this.periodicita == "00/00/00/0000") {                          //Se la periodicità è nulla (00/00/00/0000) imposta completata a true
             this.completata = true;
         }else{
             int ora = ora(this.periodicita) + ora(this.dataOra);            //Altrimenti reimposta la data di scadenza a dataOra + periodicita
