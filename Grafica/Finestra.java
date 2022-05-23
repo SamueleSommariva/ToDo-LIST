@@ -56,9 +56,17 @@ public class Finestra {
 
 
         JPanel posizionePulsanti = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel posizioneInserimentoTesto = new JPanel();
         JButton bottoneTask = new JButton("Crea Task");
+        JButton bottoneModificaTask = new JButton("Modifica Task");
         posizionePulsanti.add(bottoneTask);
+        posizionePulsanti.add(bottoneModificaTask);
         frame.add(posizionePulsanti, BorderLayout.WEST);
+
+        JTextArea titoloTask = new JTextArea("Inserisci il titolo della task");
+        posizioneInserimentoTesto.add(titoloTask);
+        titoloTask.setEditable(true);
+        frame.add(posizioneInserimentoTesto);
     }
 
 }
