@@ -36,7 +36,6 @@ public class ToDoList {
         fin.usaFrame();
 
 
-
         //Parte funzionale
         Utente utente = new Utente();
         Scanner sc = new Scanner(System.in);
@@ -45,11 +44,11 @@ public class ToDoList {
             System.out.print(">>> ");
             cmd = sc.nextLine();
             switch(cmd){
-                case "q":                               //Se il comando inserito è q
-                    utente.salvaTasks();                //salva i cambiamenti sulle task sul file Task.csv
-                    System.exit(0);               //e termina la il processo.
+            case "q":                                                                                                   //Se il comando inserito è q
+                utente.salvaTasks();                                                                                    //salva i cambiamenti sulle task sul file Task.csv
+                    System.exit(0);                                                                               //e termina la il processo.
                 default:
-                    utente.runCmd(cmd);                 //Altrimenti lancia il comando con l'apposito metodo della classe Utente
+                    utente.runCmd(cmd);                                                                                 //Altrimenti lancia il comando con l'apposito metodo della classe Utente
             }
         }
 
