@@ -90,7 +90,7 @@ public class Utente {
                     System.out.println("INFO COMMANDS:\n"
                             + "help\t\t" +        "Info comandi.\n"
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
-                            + "mktask\t\t" +      "Crea task es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
+                            + "mktask\t\t" +      "Crea task *NON INSERIRE SPAZI* es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
                             + "completed\t" +     "Completare/eseguire la task N (show)\n"
                             + "rm\t\t\t" +        "Elimina la task N (show)\n");
