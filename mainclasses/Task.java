@@ -60,7 +60,7 @@ public class Task {
         List<Task> taskList = new ArrayList<Task>();
 
         for (int l = 1, c = 1; l <= fileLines.length-1; l ++, c += 4){          //Crea una sorta di "puntatore" per la riga e per il campo
-            taskList.add(new Task(fileCamps[c],                                 //inizalizza la task con i campi puntati da c, c+1 e c+2 della linea l
+            taskList.add(new Task(sostituisci(fileCamps[c], '§', ','),                                 //inizalizza la task con i campi puntati da c, c+1 e c+2 della linea l
                     Task.ora(fileCamps[c+1]),                                   //aggiunge la task alla TaskList
                     Task.giorno(fileCamps[c+1]),
                     Task.mese(fileCamps[c+1]),
@@ -75,85 +75,30 @@ public class Task {
     
 
     public static int ora(String dataOra){
-        StringBuilder oraS = new StringBuilder();           //Ottiene l'ora dalla stringa dataOra
-        int acc = 0;                                        //***Implementarlo con lo split***
-        for (char c : dataOra.toCharArray()){
-            if (c == '/'){
-                acc++;
-            }
-            if (acc == 0){
-                oraS.append(c);
-            }
-            if (c == '/'){
-                acc++;
-            }
-        }
-        int ora = Integer.parseInt(oraS.toString());
-        return ora;
+        String[] oraS = dataOra.split("/");           //Ottiene l'ora dalla stringa dataOra
+        return new Integer(oraS[2].toString());
     }
 
 
     public static int giorno(String dataOra){
-        StringBuilder giornoS = new StringBuilder();        //Ottiene il giorno dalla stringa dataOra
-        int acc = 0;                                        //***Implementarlo con lo split***
-        boolean guardia = false;
-        for (char c : dataOra.toCharArray()){
-            if (c == '/'){
-                acc++;
-            }
-            if (acc == 1 && guardia){
-                giornoS.append(c);
-            }else if(acc == 1){
-                guardia = true;
-            }
-
-        }
-        int giorno = new Integer(giornoS.toString());
-        return giorno;
+        String[] giornoS = dataOra.split("/");        //Ottiene il giorno dalla stringa dataOra
+        return new Integer(giornoS[2].toString());
     }
 
     public static int mese(String dataOra){
-        StringBuilder meseS = new StringBuilder();          //Ottiene il mese dalla stringa dataOra
-        int acc = 0;                                        //***Implementarlo con lo split***
-        boolean guardia = false;
-        for (char c : dataOra.toCharArray()){
-            if (c == '/'){
-                acc++;
-            }
-            if (acc == 2 && guardia){
-                meseS.append(c);
-            }else if(acc == 2){
-                guardia = true;
-            }
-
-        }
-        int mese = new Integer(meseS.toString());
-        return mese;
+        String[] meseS = dataOra.split("/");          //Ottiene il mese dalla stringa dataOra
+        return new Integer(meseS[1].toString());
     }
 
 
     public static int anno(String dataOra){
-        StringBuilder annoS = new StringBuilder();          //Ottiene l'anno dalla stringa dataOra
-        int acc = 0;                                        //***Implementarlo con lo split***
-        boolean guardia = false;
-        for (char c : dataOra.toCharArray()){
-            if (c == '/'){
-                acc++;
-            }
-            if (acc == 3 && guardia){
-                annoS.append(c);
-            }else if(acc == 3){
-                guardia = true;
-            }
-
-        }
-        int anno = new Integer(annoS.toString());
-        return anno;
+        String[] anno = dataOra.split("/");          //Ottiene l'anno dalla stringa dataOra
+        return new Integer(anno[2].toString());
     }
 
     
     public void completata() {
-        if (this.periodicita == "00/00/00/0000") {                          //Se la periodicità è nulla ("00/00/00/0000") imposta completata a true
+        if (this.periodicita == "00/00/00/0000") {                          //Se la periodicità è nulla (00/00/00/0000) imposta completata a true
             this.completata = true;
         }else{
             int ora = ora(this.periodicita) + ora(this.dataOra);            //Altrimenti reimposta la data di scadenza a dataOra + periodicita
@@ -191,13 +136,26 @@ public class Task {
         if (!getCompletata()){                                  //e scrivendola sul file
             try{                                                //***BUG se l'Utente inserisce nella descrizione il carattere ','***
                 FileWriter file = new FileWriter("Task.csv", true);
-                file.write("\n" + this.descrizione + "," + this.dataOra + "," + this.periodicita + "," + this.completata);
+                file.write("\n" + sostituisci(this.descrizione, ',', '§') + "," + this.dataOra + "," + this.periodicita + "," + this.completata);
                 file.close();
             
             } catch (FileNotFoundException e) {
                 System.err.println("FileNotFoundException");
             }
         }
+    }
+
+    public static String sostituisci(String strbase, char s1, char s2){
+        char[] chars = strbase.toCharArray();
+        StringBuilder ret = new StringBuilder();
+        for(char c : chars){
+            if (c == s1){
+                ret.append(s2);
+            }else{
+                ret.append(c);
+            }
+        }
+        return ret.toString();
     }
 
     // get e set

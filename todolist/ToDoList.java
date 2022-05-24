@@ -1,3 +1,21 @@
+/**
+ * Prima versione della ToDoList v1.
+ * Gruppo:  Bonotto Tommaso, Cesca Sebastiano, Piccin Marco, Sommariva Sammuele.
+ * Implementazioni funzionali classe Task, Utente.
+ * Implementazioni grafiche classe Bottone, Finestra.
+ *
+ * Bug riscontrati:
+ *      Presenza di uno spazio (' ') nella descrizione della task
+ *
+ * Prossimi aggiornamenti:
+ *      Eliminazione dei Bug,
+ *      Miglioramenti estetici generali dell'interfaccia grafica.
+ *      Aggiungere funzioni ai Bottoni dell'interfaccia grafica.
+ */
+
+
+
+
 package ToDoList;
 import java.awt.*;
 import java.io.IOException;

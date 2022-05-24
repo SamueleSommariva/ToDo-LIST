@@ -21,13 +21,13 @@ public class Utente {
         FileWriter file = new FileWriter("Task.csv");
         file.write("");
         Task t;
-        for(int i = 0; i < taskList.size(); i++){
+        for(int i = 0; i < taskList.size(); i++){               //Chiama il metodo salvaTask per ogni task della taskList
             t = taskList.get(i);
             t.salvaTask();
         }
     }
     
-    public void runCmd(String command){
+    public void runCmd(String command){                         //Esegue i comandi inseriti nella CLI
         try{
             String[] cmd = command.split(" ");
             switch (cmd[0]) {
@@ -90,7 +90,7 @@ public class Utente {
                     System.out.println("INFO COMMANDS:\n"
                             + "help\t\t" +        "Info comandi.\n"
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
-                            + "mktask\t\t" +      "Crea task es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
+                            + "mktask\t\t" +      "Crea task *NON INSERIRE SPAZI* es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
                             + "completed\t" +     "Completare/eseguire la task N (show)\n"
                             + "rm\t\t\t" +        "Elimina la task N (show)\n");
@@ -113,8 +113,8 @@ public class Utente {
     }
     
     
-    public String toString(){
-        StringBuilder s = new StringBuilder();
+    public String toString(){                                                   //Esegue il toString delle tasks suddividendo gli attributi
+        StringBuilder s = new StringBuilder();                                  //Viene usato nel comando "show"
         int i = 1;
         s.append("N  DESC.\t\t\t\t\t\t\tDATE\t\tPERIODICITY\t\tCOMPLETE\n");
         for (Task task : taskList){

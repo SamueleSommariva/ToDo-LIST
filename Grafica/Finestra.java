@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
-
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
 
@@ -69,27 +68,47 @@ public class Finestra extends JFrame{                                           
 
         SwingUtilities.updateComponentTreeUI (frame);
 
+
         JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
+        JPanel posizioneInserimentoTesto = new JPanel();
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
 
+        JLabel etichettaInserimentoTitolo = new JLabel("Inserisci il titolo della task qui...");                    // Creazione etichetta per informare la poszione dell'insrimento del titolo
+        JTextArea titoloTask = new JTextArea("");                                                                       // Creazione del campo per l'insrimento del titolo
+
+        JPanel pannelloLayout = new JPanel();
+        frame.add(pannelloLayout, titoloTask);
+        JPanel titolo = new JPanel();
+        frame.add(etichettaInserimentoTitolo);
+        titoloTask.setEditable(true);
+
+        GridBagLayout grigliaAvanzata = new GridBagLayout();
+        GridBagConstraints limite = new GridBagConstraints();
+        frame.setLayout(grigliaAvanzata);
+
+        impostaLimite(limite, 0,10, 0,2,1, 2);
+        frame.add(posizionePulsanti);
+        grigliaAvanzata.setConstraints(posizionePulsanti, limite);
+
+
+        impostaLimite(limite, 0,4,2,3,1,1);
+        grigliaAvanzata.setConstraints(titolo,limite);
+
+
+
+        impostaLimite(limite,0,2,2,2,1,1);
+        frame.add(titoloTask);
+        grigliaAvanzata.setConstraints(titoloTask,limite);
+
+
+
+        titoloTask.setLineWrap(true);                                                                                   //
+        titoloTask.setWrapStyleWord(true);                                                                              //
                                                                                                                         // Impostazione del campo modificabile
-        JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
-        JTextField titoloTask = new JTextField(25);
-        JTextArea taskField = new JTextArea(10,25);
 
-        JButton bottoneInvioTitolo = new JButton("Salva titolo");
-
-        JPanel pannelloInserimento = new JPanel();
-        pannelloInserimento.add(promtTitolo);
-        pannelloInserimento.add(titoloTask);
-        frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
-
-        frame.getContentPane().add(BorderLayout.CENTER, taskField);
-
-        frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
 
         frame.setVisible (true);
 
