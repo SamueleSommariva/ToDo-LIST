@@ -9,7 +9,8 @@
  *
  * Prossimi aggiornamenti:
  *      Eliminazione dei Bug,
- *      Miglioramenti generali dell'interfaccia grafica.
+ *      Miglioramenti estetici generali dell'interfaccia grafica.
+ *      Aggiungere funzioni ai Bottoni dell'interfaccia grafica.
  */
 
 
