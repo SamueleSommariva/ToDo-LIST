@@ -76,7 +76,7 @@ public class Finestra extends JFrame{                                           
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
 
-        JLabel etichettaInserimentoTitolo = new JLabel("Inserisci il titolo della task qui...");                    // Creazione etichetta per informare la poszione dell'insrimento del titolo
+        JLabel etichettaInserimentoTitolo = new JLabel("Inserisci il titolo della task qui..");                    // Creazione etichetta per informare la poszione dell'insrimento del titolo
         JTextArea titoloTask = new JTextArea("");                                                                       // Creazione del campo per l'insrimento del titolo
 
         JPanel pannelloLayout = new JPanel();
