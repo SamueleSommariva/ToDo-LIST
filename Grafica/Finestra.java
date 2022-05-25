@@ -3,19 +3,12 @@ package Grafica;
 
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import mainclasses.Utente;
 
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.metal.DefaultMetalTheme;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import static mainclasses.Utente.*;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
@@ -25,12 +18,11 @@ public class Finestra extends JFrame{                                           
     public void usaFrame(Utente ute){
         this.utente = ute;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
-        frame.setSize (1200, 1080);                                                                           // Set della grandezza del frame
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
+        frame.setSize (1200, 800);                                                                           // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
-        frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame
-        frame.setFont(new Font("Arial Black", Font.BOLD, 20));                                                // Impostazione del font dell'applicazione
+        frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
 
         ImageIcon image = new ImageIcon("Grafica\\Immagini\\TodoTest.png");                                      // Selezione file dell'icona dall'applicazione
         frame.setIconImage(image.getImage());                                                                           // Set dell'icona via path
@@ -68,9 +60,13 @@ public class Finestra extends JFrame{                                           
         // Impostazione del campo modificabile
         JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
         JTextField titoloTask = new JTextField(25);
-        JTextArea taskField = new JTextArea(ute.toString(),50,50);
-        taskField.setBackground(Color.);
+        JTextArea taskField = new JTextArea(ute.toStringGUI(),25,25);
+        Font arial = new Font("Arial", Font.BOLD, 16);
+        taskField.setFont(arial);
+        taskField.setForeground(Color.black);
+        taskField.setBackground(Color.GRAY);
         taskField.setEditable(false);
+
 
         JButton bottoneInvioTitolo = new JButton("Salva titolo");
 
@@ -89,6 +85,13 @@ public class Finestra extends JFrame{                                           
 
         frame.setVisible (true);
 
+
+    }
+
+
+    public void aggiorna() {
+        Finestra f = new Finestra();
+        f.usaFrame(this.utente);
     }
 
 }
