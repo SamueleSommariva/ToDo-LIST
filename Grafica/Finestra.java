@@ -9,6 +9,8 @@ import mainclasses.Utente;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
@@ -50,12 +52,24 @@ public class Finestra extends JFrame{                                           
 
         SwingUtilities.updateComponentTreeUI (frame);
 
+        JButton bottoneInvioTitolo = new JButton("Salva titolo");
+
+        JButton aggiorna = new JButton("Aggiorna");
+        aggiorna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.updateComponentTreeUI(frame);
+            }
+        });
+
+        SwingUtilities.updateComponentTreeUI(frame);
 
         JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
+        posizionePulsanti.add(aggiorna);
 
         // Impostazione del campo modificabile
         JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
@@ -68,7 +82,7 @@ public class Finestra extends JFrame{                                           
         taskField.setEditable(false);
 
 
-        JButton bottoneInvioTitolo = new JButton("Salva titolo");
+
 
         JPanel pannelloInserimento = new JPanel();
         pannelloInserimento.add(promtTitolo);
@@ -83,15 +97,13 @@ public class Finestra extends JFrame{                                           
                                                                                                                         // Impostazione del campo modificabile
 
 
+
         frame.setVisible (true);
 
 
-    }
 
 
-    public void aggiorna() {
-        Finestra f = new Finestra();
-        f.usaFrame(this.utente);
     }
+
 
 }
