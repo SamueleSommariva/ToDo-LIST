@@ -92,7 +92,7 @@ public class Utente {
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
                             + "mktask\t\t" +      "Crea task *NON INSERIRE SPAZI* es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
-                            + "completed\t" +     "Completare/eseguire la task N (show)\n"
+                            + "complete\t" +     "Completare/eseguire la task N (show)\n"
                             + "rm\t\t\t" +        "Elimina la task N (show)\n");
                     break;
                 case "rm":
@@ -126,8 +126,9 @@ public class Utente {
     public String toStringGUI(){                                                   //Esegue il toString delle tasks suddividendo gli attributi
         StringBuilder s = new StringBuilder();                                  //Viene usato nel comando "show"
         int i = 1;
+        s.append("N        TITOLO\t\t\t\tDATA\tPERIODICITÀ\t\t\tCOMPLETATA\n");
         for (Task task : taskList){
-            s.append(i +") " + task.toStringGUI() + '\n');
+            s.append(i +") " + task.toString() + '\n');
             i++;
         }
         return s.toString();
