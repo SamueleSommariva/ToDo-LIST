@@ -1,7 +1,10 @@
 package Grafica;
 
+
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import mainclasses.Utente;
 
 
 import javax.swing.*;
@@ -12,31 +15,18 @@ import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
+import static mainclasses.Utente.*;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
-
-    void impostaLimite(GridBagConstraints gbc, int gx, int gy, int gw, int gh, int wx, int wy) {
-
-        gbc.gridx = gx;
-
-        gbc.gridy = gy;
-
-        gbc.gridwidth = gw;
-
-        gbc.gridheight = gh;
-
-        gbc.weightx = wx;
-
-        gbc.weighty = wy;
-
-    }
+    Utente utente;
 
 
-    public void usaFrame(){
+    public void usaFrame(Utente ute){
+        this.utente = ute;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
-        frame.setSize (600, 600);                                                                           // Set della grandezza del frame
+        frame.setSize (1200, 1080);                                                                           // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
         frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame
@@ -78,7 +68,9 @@ public class Finestra extends JFrame{                                           
         // Impostazione del campo modificabile
         JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
         JTextField titoloTask = new JTextField(25);
-        JTextArea taskField = new JTextArea(10,25);
+        JTextArea taskField = new JTextArea(ute.toString(),50,50);
+        taskField.setBackground(Color.);
+        taskField.setEditable(false);
 
         JButton bottoneInvioTitolo = new JButton("Salva titolo");
 
