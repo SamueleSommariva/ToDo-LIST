@@ -8,11 +8,10 @@
  *      Presenza di uno spazio (' ') nella descrizione della task
  *
  * Prossimi aggiornamenti:
- *      Eliminazione dei Bug,
+ *      Eliminazione dei Bug.
  *      Miglioramenti estetici generali dell'interfaccia grafica.
  *      Aggiungere funzioni ai Bottoni dell'interfaccia grafica.
  */
-
 
 
 
@@ -31,14 +30,14 @@ import javax.swing.*;
 public class ToDoList {
     public static void main(String[] args) throws IOException {
 
+        Utente utente = new Utente();
 
         //Finestra                                                                                                      //Creata classe finestra con all'interno tutta la parte grafica
         Finestra fin = new Finestra();
-        fin.usaFrame();
+        fin.usaFrame(utente);
 
 
         //Parte funzionale
-        Utente utente = new Utente();
         Scanner sc = new Scanner(System.in);
         String cmd = "";
         while (true){

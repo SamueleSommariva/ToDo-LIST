@@ -186,16 +186,23 @@ public class Task {
 
     @Override
     public String toString() {                                                              //toString con la formattazione dell'indentazione
-        return  descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t\t\t\t" :
-                (descrizione.length() < 8 ?"\t\t\t\t\t\t\t" :
-                    (descrizione.length() < 12 ? "\t\t\t\t\t\t" :
-                        (descrizione.length() < 16 ? "\t\t\t\t\t" :
+        return  "       " + descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t" :
+                (descrizione.length() < 8 ?"\t\t\t\t" :
+                    (descrizione.length() < 12 ? "\t\t\t\t" :
+                        (descrizione.length() < 16 ? "\t\t\t\t" :
                             (descrizione.length() < 20 ? "\t\t\t\t" :
                                 (descrizione.length() < 24 ? "\t\t\t" :
                                     (descrizione.length() < 28 ? "\t\t" :
                                         (descrizione.length() < 32 ? "\t" : "\t")))))))) +
                 dataOra + "\t" +
-                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t\t" +
+                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t" +
+                (completata ? "SI" : "NO");
+    }
+
+    public String toStringGUI() {
+        return descrizione + " - " +
+                dataOra + " - " +
+                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + " - " +
                 completata;
     }
 }

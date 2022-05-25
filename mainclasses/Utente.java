@@ -116,9 +116,18 @@ public class Utente {
     public String toString(){                                                   //Esegue il toString delle tasks suddividendo gli attributi
         StringBuilder s = new StringBuilder();                                  //Viene usato nel comando "show"
         int i = 1;
-        s.append("N  DESC.\t\t\t\t\t\t\tDATE\t\tPERIODICITY\t\tCOMPLETE\n");
+        s.append("N        TITOLO\t\t\t\tDATA\tPERIODICITÀ\t\t\tCOMPLETATA\n");
         for (Task task : taskList){
             s.append(i +") " + task.toString() + '\n');
+            i++;
+        }
+        return s.toString();
+    }
+    public String toStringGUI(){                                                   //Esegue il toString delle tasks suddividendo gli attributi
+        StringBuilder s = new StringBuilder();                                  //Viene usato nel comando "show"
+        int i = 1;
+        for (Task task : taskList){
+            s.append(i +") " + task.toStringGUI() + '\n');
             i++;
         }
         return s.toString();
