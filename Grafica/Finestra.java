@@ -1,46 +1,45 @@
 package Grafica;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+import mainclasses.Utente;
 
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.metal.DefaultMetalTheme;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
+import java.awt.event.*;
+import java.io.IOException;
+
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
-
-    void impostaLimite(GridBagConstraints gbc, int gx, int gy, int gw, int gh, int wx, int wy) {
-
-        gbc.gridx = gx;
-
-        gbc.gridy = gy;
-
-        gbc.gridwidth = gw;
-
-        gbc.gridheight = gh;
-
-        gbc.weightx = wx;
-
-        gbc.weighty = wy;
-
-    }
+    Utente utente;
 
 
-    public void usaFrame(){
+    public void usaFrame(Utente ute){
+        this.utente = ute;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
-        frame.setSize (600, 600);                                                                           // Set della grandezza del frame
+
+
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);                                                     // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
+        frame.addWindowListener(new WindowAdapter() {                                                                   //Cambia l'azione che avviene in chiusura
+
+            @Override
+            public void windowClosing(WindowEvent e){                                                                   //Salva e chiude
+                try {
+                    ute.salvaTasks();
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                }catch (Exception z){
+
+                }
+
+            }
+        });
+
+        frame.setSize (1200, 800);                                                                          // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
-        frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame
-        frame.setFont(new Font("Arial Black", Font.BOLD, 20));                                                // Impostazione del font dell'applicazione
+        frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
 
         ImageIcon image = new ImageIcon("Grafica\\Immagini\\TodoTest.png");                                      // Selezione file dell'icona dall'applicazione
         frame.setIconImage(image.getImage());                                                                           // Set dell'icona via path
@@ -68,19 +67,37 @@ public class Finestra extends JFrame{                                           
 
         SwingUtilities.updateComponentTreeUI (frame);
 
+        JButton bottoneInvioTitolo = new JButton("Salva titolo");
+
+        JButton aggiorna = new JButton("Aggiorna");
+        aggiorna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.updateComponentTreeUI(frame);
+            }
+        });
+
+        SwingUtilities.updateComponentTreeUI(frame);
 
         JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
+        posizionePulsanti.add(aggiorna);
 
         // Impostazione del campo modificabile
         JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
         JTextField titoloTask = new JTextField(25);
-        JTextArea taskField = new JTextArea(10,25);
+        JTextArea taskField = new JTextArea(ute.toStringGUI(),25,25);
+        Font arial = new Font("Arial", Font.BOLD, 16);
+        taskField.setFont(arial);
+        taskField.setForeground(Color.black);
+        taskField.setBackground(Color.GRAY);
+        taskField.setEditable(false);
 
-        JButton bottoneInvioTitolo = new JButton("Salva titolo");
+
+
 
         JPanel pannelloInserimento = new JPanel();
         pannelloInserimento.add(promtTitolo);
@@ -95,8 +112,12 @@ public class Finestra extends JFrame{                                           
                                                                                                                         // Impostazione del campo modificabile
 
 
-        frame.setVisible (true);
+
+
+
 
     }
+
+
 
 }
