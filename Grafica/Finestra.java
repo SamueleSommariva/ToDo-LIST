@@ -58,15 +58,13 @@ public class Finestra extends JFrame{                                           
         aggiorna.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = 1;
                 SwingUtilities.updateComponentTreeUI(frame);
             }
         });
 
-
         SwingUtilities.updateComponentTreeUI(frame);
 
-        JPanel posizionePulsanti = new JPanel();                                                                       // Creazione dei pulsanti
+        JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
@@ -76,15 +74,7 @@ public class Finestra extends JFrame{                                           
         // Impostazione del campo modificabile
         JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
         JTextField titoloTask = new JTextField(25);
-        JTextArea taskField = new JTextArea(ute.toStringGUI(),25,73);
-        taskField.setLineWrap(true);
-        taskField.setEditable(false);
-        taskField.setVisible(true);
-        taskField.setWrapStyleWord(true);
-
-        JScrollPane scroll = new JScrollPane (taskField);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+        JTextArea taskField = new JTextArea(ute.toStringGUI(),25,25);
         Font arial = new Font("Arial", Font.BOLD, 16);
         taskField.setFont(arial);
         taskField.setForeground(Color.black);
@@ -92,20 +82,26 @@ public class Finestra extends JFrame{                                           
         taskField.setEditable(false);
 
 
+
+
         JPanel pannelloInserimento = new JPanel();
         pannelloInserimento.add(promtTitolo);
         pannelloInserimento.add(titoloTask);
-        pannelloInserimento.add(bottoneInvioTitolo);
-
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
 
-        frame.getContentPane().add(scroll);
+        frame.getContentPane().add(BorderLayout.CENTER, taskField);
 
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
 
+        frame.setVisible (true);                                                       //
+                                                                                                                        // Impostazione del campo modificabile
+
+
 
         frame.setVisible (true);
-                                                                                                                        // Impostazione del campo modificabile        frame.setVisible (true);
+
+
+
 
     }
 
