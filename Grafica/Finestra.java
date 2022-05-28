@@ -17,8 +17,7 @@ public class Finestra extends JFrame{                                           
     Utente utente;
 
 
-    public void usaFrame(Utente ute){
-        this.utente = ute;
+    public void usaFrame(){
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
         frame.setSize (1200, 800);                                                                           // Set della grandezza del frame

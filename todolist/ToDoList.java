@@ -15,7 +15,7 @@
 
 
 
-package ToDoList;
+package ToDolist;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
@@ -36,7 +36,6 @@ public class ToDoList {
         Finestra fin = new Finestra();
         fin.usaFrame(utente);
 
-
         //Parte funzionale
         Scanner sc = new Scanner(System.in);
         String cmd = "";
@@ -51,6 +50,9 @@ public class ToDoList {
                     utente.runCmd(cmd);                                                                                 //Altrimenti lancia il comando con l'apposito metodo della classe Utente
             }
         }
+
+
+
 
     }
 
