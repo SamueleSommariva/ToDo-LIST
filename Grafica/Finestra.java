@@ -1,5 +1,7 @@
 package Grafica;
 
+
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import mainclasses.Utente;
 
@@ -7,9 +9,8 @@ import mainclasses.Utente;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
-import java.awt.event.*;
-import java.io.IOException;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
@@ -19,24 +20,8 @@ public class Finestra extends JFrame{                                           
     public void usaFrame(Utente ute){
         this.utente = ute;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
-
-
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);                                                     // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
-        frame.addWindowListener(new WindowAdapter() {                                                                   //Cambia l'azione che avviene in chiusura
-
-            @Override
-            public void windowClosing(WindowEvent e){                                                                   //Salva e chiude
-                try {
-                    ute.salvaTasks();
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                }catch (Exception z){
-
-                }
-
-            }
-        });
-
-        frame.setSize (1200, 800);                                                                          // Set della grandezza del frame
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
+        frame.setSize (1200, 800);                                                                           // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
         frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
@@ -109,15 +94,16 @@ public class Finestra extends JFrame{                                           
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
 
         frame.setVisible (true);                                                       //
-                                                                                                                        // Impostazione del campo modificabile
+        // Impostazione del campo modificabile
 
 
+
+        frame.setVisible (true);
 
 
 
 
     }
-
 
 
 }
