@@ -21,7 +21,7 @@ public class Finestra extends JFrame{                                           
         this.utente = ute;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                                                           // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
-        frame.setSize (1200, 800);                                                                           // Set della grandezza del frame
+        frame.setSize (1200, 630);                                                                           // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
         frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
@@ -64,6 +64,25 @@ public class Finestra extends JFrame{                                           
 
         SwingUtilities.updateComponentTreeUI(frame);
 
+
+        /**
+         * Campi dati Task
+         */
+
+        JLabel promtTitolo = new JLabel("Titolo Task");
+        JLabel promtData = new JLabel("Data Task");
+        JLabel promtPeriodicita = new JLabel("Periodicita Task");
+        JTextField titoloTask = new JTextField(25);
+        JTextField dataTask = new JTextField(10);
+        JTextField periodicitaTask = new JTextField(10);
+
+
+
+
+        /**
+         * Pulsanti
+         */
+
         JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
@@ -71,9 +90,12 @@ public class Finestra extends JFrame{                                           
         posizionePulsanti.add(bottoneModificaTask);
         posizionePulsanti.add(aggiorna);
 
-        // Impostazione del campo modificabile
-        JLabel promtTitolo = new JLabel("Inserisci il titolo della Task qui...");
-        JTextField titoloTask = new JTextField(25);
+
+        /**
+         * Lista Task
+         */
+
+
         JTextArea taskField = new JTextArea(ute.toStringGUI(),25,25);
         Font arial = new Font("Arial", Font.BOLD, 16);
         taskField.setFont(arial);
@@ -82,16 +104,24 @@ public class Finestra extends JFrame{                                           
         taskField.setEditable(false);
 
 
-
+        /**
+         * Inserimento componenti nel Frame
+         */
 
         JPanel pannelloInserimento = new JPanel();
         pannelloInserimento.add(promtTitolo);
         pannelloInserimento.add(titoloTask);
+        pannelloInserimento.add(promtData);
+        pannelloInserimento.add(dataTask);
+        pannelloInserimento.add(promtPeriodicita);
+        pannelloInserimento.add(periodicitaTask);
+
+
+
+
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
-
-        frame.getContentPane().add(BorderLayout.CENTER, taskField);
-
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
+        frame.getContentPane().add(BorderLayout.CENTER, taskField);
 
         frame.setVisible (true);                                                       //
                                                                                                                         // Impostazione del campo modificabile
