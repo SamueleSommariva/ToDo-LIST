@@ -104,7 +104,6 @@ public class Finestra extends JFrame{                                           
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
 
 
-
         frame.setVisible (true);
                                                                                                                         // Impostazione del campo modificabile        frame.setVisible (true);
 
