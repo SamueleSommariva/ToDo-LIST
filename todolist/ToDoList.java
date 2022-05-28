@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import Grafica.Finestra;
+import Grafica.FinestraData;
 import com.formdev.flatlaf.FlatDarkLaf;
 import mainclasses.Utente;
 
@@ -18,6 +19,10 @@ public class ToDoList {
         //Finestra                                                                                                      //Creata classe finestra con all'interno tutta la parte grafica
         Finestra fin = new Finestra();
         fin.usaFrame(utente);
+
+        //FinestraData
+        FinestraData fd = new FinestraData();
+        fd.usaFrameData(utente);
 
 
         //Parte funzionale
