@@ -70,43 +70,43 @@ public class Task {
 
         return taskList;
     }
-    
-    
-    
+
+
+
 
     public static int ora(String dataOra){
         String[] oraS = dataOra.split("/");           //Ottiene l'ora dalla stringa dataOra
-        return new Integer(oraS[2].toString());
+        return new Integer(oraS[0].toString());
     }
 
 
     public static int giorno(String dataOra){
         String[] giornoS = dataOra.split("/");        //Ottiene il giorno dalla stringa dataOra
-        return new Integer(giornoS[2].toString());
+        return new Integer(giornoS[1].toString());
     }
 
     public static int mese(String dataOra){
         String[] meseS = dataOra.split("/");          //Ottiene il mese dalla stringa dataOra
-        return new Integer(meseS[1].toString());
+        return new Integer(meseS[2].toString());
     }
 
 
     public static int anno(String dataOra){
         String[] anno = dataOra.split("/");          //Ottiene l'anno dalla stringa dataOra
-        return new Integer(anno[2].toString());
+        return new Integer(anno[3].toString());
     }
 
-    
+
     public void completata() {
-        if (this.periodicita == "00/00/00/0000") {                          //Se la periodicità è nulla (00/00/00/0000) imposta completata a true
+        if (this.periodicita.equals("00/00/00/0000")) {                          //Se la periodicità è nulla (00/00/00/0000) imposta completata a true
             this.completata = true;
         }else{
-            int ora = ora(this.periodicita) + ora(this.dataOra);            //Altrimenti reimposta la data di scadenza a dataOra + periodicita
-            int giorno = giorno(this.periodicita) + giorno(this.dataOra);
-            int mese = mese(this.periodicita) + mese(this.dataOra);
-            int anno = anno(this.periodicita) + anno(this.dataOra);
+            int ora = ora(this.dataOra) + ora(this.periodicita);            //Altrimenti reimposta la data di scadenza a dataOra + periodicita
+            int giorno = giorno(this.dataOra) + giorno(this.periodicita);
+            int mese = mese(this.dataOra) + mese(this.periodicita);
+            int anno = anno(this.dataOra) + anno(this.periodicita);
             int guardia = 0;
-            while (guardia != 3){                                           //Facendo gli stessi controlli fatti nel costruttore
+            while (guardia < 3){                                           //Facendo gli stessi controlli fatti nel costruttore
                 guardia = 0;                                                //Ma effettuando una sorta di addizione in colonna
                 if (ora > 24){                                              //Esempio     23 ore 5 periodicità 23+5=28 = 1 giorno e 4 ore
                     ora -= 24;
@@ -187,16 +187,13 @@ public class Task {
     //toString CLI
     @Override
     public String toString() {                                                              //toString con la formattazione dell'indentazione
-        return  "       " + descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t" :
-                (descrizione.length() < 8 ?"\t\t\t\t" :
-                    (descrizione.length() < 12 ? "\t\t\t\t" :
-                        (descrizione.length() < 16 ? "\t\t\t\t" :
-                            (descrizione.length() < 20 ? "\t\t\t\t" :
-                                (descrizione.length() < 24 ? "\t\t\t" :
-                                    (descrizione.length() < 28 ? "\t\t" :
-                                        (descrizione.length() < 32 ? "\t" : "\t")))))))) +
+        return  "     " + descrizione + (descrizione.length() < 3 ? "\t\t\t\t\t" :
+                (descrizione.length() < 4 ? "\t\t\t\t" :
+                        (descrizione.length() < 7 ?"\t\t\t\t" :
+                                (descrizione.length() < 11 ? "\t\t\t" :
+                                        (descrizione.length() < 15 ? "\t\t" : "\t"))))) +
                 dataOra + "\t" +
-                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t" +
+                ((this.periodicita.equals("00/00/00/0000")) ? "NO\t" : periodicita) + "\t\t\t" +
                 (completata ? "SI" : "NO");
     }
 
