@@ -17,11 +17,13 @@ public class ToDoList {
         Utente utente = new Utente();
         //Finestra                                                                                                      //Creata classe finestra con all'interno tutta la parte grafica
         Finestra fin = new Finestra();
-        fin.usaFrame(utente);
 
         //Parte funzionale
         Scanner sc = new Scanner(System.in);
         String cmd = "";
+
+        fin.usaFrame(utente);
+
         while (true){
             System.out.print(">>> ");
             cmd = sc.nextLine();
