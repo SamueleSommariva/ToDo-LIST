@@ -30,7 +30,7 @@ public class ToDoList {
             switch(cmd){
                 case "q":
                     utente.salvaTasks();
-                    return;
+                    System.exit(1);
                 default:
                     utente.runCmd(cmd);
             }
