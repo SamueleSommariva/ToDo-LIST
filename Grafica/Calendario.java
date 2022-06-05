@@ -1,5 +1,7 @@
 package Grafica;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -21,11 +23,14 @@ public class Calendario {
 
     public static void main(String args[]) {
         //Look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-            System.out.print(e.getMessage());
+        try{
+            UIManager.setLookAndFeel(new FlatDarkLaf() );
         }
+        catch (Exception e){
+            e.printStackTrace ();
+        }
+        //Icon
+        //ImageIcon icon = new ImageIcon("icon.png");                                                                   //  <--- Quando l'icona è pronta inserire qui
 
         //Prepare frame
         frame = new JFrame();
@@ -49,12 +54,12 @@ public class Calendario {
         panel = new JPanel(null);
 
         //Set border
-        panel.setBorder(BorderFactory.createTitledBorder("Calendario"));
+        panel.setBorder(BorderFactory.createTitledBorder("Calendario") );
 
         //Register action listeners
-        preButton.addActionListener(new btnPrev_Action());
-        nextButton.addActionListener(new btnNext_Action());
-        combo.addActionListener(new cmbYear_Action());
+        preButton.addActionListener(new btnPrev_Action() );
+        nextButton.addActionListener(new btnNext_Action() );
+        combo.addActionListener(new cmbYear_Action() );
 
         //Add controls to pane
         pane.add(panel);
@@ -67,7 +72,7 @@ public class Calendario {
         //Set bounds                                                                                                    //Change the size only if we won to have a better look/feel
         panel.setBounds(0, 0, 320, 335);
         label.setBounds(160 - label.getPreferredSize().width / 2, 25, 100, 25);
-        combo.setBounds(230, 305, 80, 20);
+        combo.setBounds(230, 305, 80, 20);      //(230, 305, 80, 20)
         preButton.setBounds(10, 25, 60, 25);
         nextButton.setBounds(250, 25, 60, 25);
         scroll.setBounds(10, 50, 300, 250);
@@ -85,7 +90,7 @@ public class Calendario {
         currentYear = realYear;
 
         //Add headers
-        String[] headers = {"Lun", "Mar", "Mer", "Gio", "Ven", "Sab","Dom"};
+        String[] headers = {"Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"};
         for (int i = 0; i < 7; i++) {
             mtblCalendar.addColumn(headers[i]);
         }
@@ -106,8 +111,9 @@ public class Calendario {
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(6);
 
-        //Populate table
+        //Set slide year + set all the year usable(+100 -100 current year)
         for (int i = realYear - 100; i <= realYear + 100; i++) {
+            System.out.println(String.valueOf(i));
             combo.addItem(String.valueOf(i));
         }
 
@@ -145,11 +151,11 @@ public class Calendario {
         nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
         som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 
-        //Draw calendar
+        //Draw calendar (graphical representation of the month)
         for (int i = 1; i <= nod; i++) {
             int row = (i + som - 2) / 7;
             int column = (i + som - 2) % 7;
-            mtblCalendar.setValueAt(i, row, column);
+            mtblCalendar.setValueAt(1, row, column);
         }
 
         table.setDefaultRenderer(table.getColumnClass(0), new tblCalendarRenderer());
@@ -160,7 +166,7 @@ public class Calendario {
         public Component getTableCellRendererComponent(JTable table, Object value,
                                                        boolean selected, boolean focused, int row, int column) {
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-            if (column == 5 || column == 6) {
+            if (column == 0 || column == 6) {
                 setBackground(new Color(255, 220, 220));                                                        //Set background color for weekends
             } else {
                 setBackground(new Color(255, 255, 255));                                                        //Set background color for weekdays

@@ -50,15 +50,10 @@ public class Finestra extends JFrame{                                           
         JPanel panel = new JPanel ();
         frame.setContentPane ( panel );
 
-        try                                                                                                             // Implementazione del tema "FlatDarkLaf"
-        {
-            UIManager.setLookAndFeel
-                    (
-                            new FlatDarkLaf ()
-                    );
+        try{
+            UIManager.setLookAndFeel(new FlatDarkLaf () );
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             e.printStackTrace ();
         }
 
