@@ -7,6 +7,7 @@ import mainclasses.Utente;
 
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -33,7 +34,7 @@ public class Finestra extends JFrame{                                           
                 }
             }
         });
-        frame.setSize (1200, 630);                                                                           // Set della grandezza del frame
+        frame.setSize (1400, 630);                                                                           // Set della grandezza del frame
         frame.setLocationRelativeTo (null);                                                                             // Set della posizone di apertura dell'applicazione
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
         frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
@@ -68,11 +69,17 @@ public class Finestra extends JFrame{                                           
          */
 
         JLabel promtTitolo = new JLabel("Titolo Task");
+        promtTitolo.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel promtData = new JLabel("Data Task");
+        promtData.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel promtPeriodicita = new JLabel("Periodicita Task");
+        promtPeriodicita.setFont(new Font("Arial", Font.BOLD, 20));
         JTextField titoloTask = new JTextField(25);
+        titoloTask.setFont(new Font("Arial", Font.PLAIN, 15));
         JTextField dataTask = new JTextField(10);
+        dataTask.setFont(new Font("Arial", Font.PLAIN, 15));
         JTextField periodicitaTask = new JTextField(10);
+        dataTask.setFont(new Font("Arial", Font.PLAIN, 15));
 
 
 
@@ -83,6 +90,9 @@ public class Finestra extends JFrame{                                           
 
         JPanel posizionePulsanti = new JPanel();                                                                        // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
+        bottoneTask.setFont(new Font("Arial", Font.PLAIN, 13));
+        bottoneTask.setBackground(new Color(100,20,200));
+        bottoneTask.setForeground(Color.white);
         bottoneTask.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +105,10 @@ public class Finestra extends JFrame{                                           
             }
         });
 
-        JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
+        JButton bottoneModificaTask = new JButton("Modifica Task");                                                // Creazione bottone "Modifica Task"
+        bottoneModificaTask.setFont(new Font("Arial", Font.PLAIN, 13));
+        bottoneModificaTask.setBackground(new Color(100,20,200));
+        bottoneModificaTask.setForeground(Color.white);
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
 
@@ -108,8 +121,8 @@ public class Finestra extends JFrame{                                           
         JTextArea taskField = new JTextArea(utente.toStringGUI(),25,25);
         Font arial = new Font("Arial", Font.BOLD, 16);
         taskField.setFont(arial);
+        taskField.setBackground(new Color(255,157,123));
         taskField.setForeground(Color.black);
-        taskField.setBackground(Color.GRAY);
         taskField.setEditable(false);
 
         /**
