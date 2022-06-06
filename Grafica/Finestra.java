@@ -3,7 +3,6 @@ package Grafica;
 
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import mainclasses.Task;
 import mainclasses.Utente;
 
 
@@ -20,15 +19,15 @@ public class Finestra extends JFrame{                                           
     Utente utente;
 
 
-    public void usaFrame(Utente ute){
-        this.utente = ute;
+    public Finestra usaFrame(Utente utente){
+        this.utente = utente;
         JFrame frame = new JFrame ();                                                                                   // Viene creato un nuovo frame "JFrame"
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);                                                     // Si imposta la funzione che al click della crocetta dell'applicazione, si fermerà l'intero programma
         frame.addWindowListener(new WindowAdapter() {                                                                   //Cambia l'azione che avviene in chiusura
             @Override
             public void windowClosing(WindowEvent e){                                                                   //Salva e chiude
                 try {
-                    ute.salvaTasks();
+                    utente.salvaTasks();
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }catch (Exception z){
                 }
@@ -51,30 +50,15 @@ public class Finestra extends JFrame{                                           
         JPanel panel = new JPanel ();
         frame.setContentPane ( panel );
 
-
-        try                                                                                                             // Implementazione del tema "FlatDarkLaf"
-        {
-            UIManager.setLookAndFeel
-                    (
-                            new FlatDarkLaf ()
-                    );
+        try{
+            UIManager.setLookAndFeel(new FlatDarkLaf () );
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             e.printStackTrace ();
         }
 
         SwingUtilities.updateComponentTreeUI (frame);
 
-        JButton bottoneInvioTitolo = new JButton("Salva titolo");
-
-        JButton aggiorna = new JButton("Aggiorna");
-        aggiorna.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.updateComponentTreeUI(frame);
-            }
-        });
 
         SwingUtilities.updateComponentTreeUI(frame);
 
@@ -97,12 +81,23 @@ public class Finestra extends JFrame{                                           
          * Pulsanti
          */
 
-        JPanel posizionePulsanti = new JPanel();                                       // Creazione dei pulsanti
+        JPanel posizionePulsanti = new JPanel();                                                                        // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
+        bottoneTask.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                utente.runCmd("mktask " + titoloTask.getText() + " " +
+                        dataTask.getText() + " " +
+                        periodicitaTask.getText());
+                Finestra f = new Finestra().usaFrame(utente);
+                frame.dispose();
+
+            }
+        });
+
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                 // Creazione bottone "Modifica Task"
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
-        posizionePulsanti.add(aggiorna);
 
 
         /**
@@ -110,7 +105,7 @@ public class Finestra extends JFrame{                                           
          */
 
 
-        JTextArea taskField = new JTextArea(ute.toStringGUI(),25,25);
+        JTextArea taskField = new JTextArea(utente.toStringGUI(),25,25);
         Font arial = new Font("Arial", Font.BOLD, 16);
         taskField.setFont(arial);
         taskField.setForeground(Color.black);
@@ -118,15 +113,13 @@ public class Finestra extends JFrame{                                           
         taskField.setEditable(false);
 
         /**
-         * Creazione pannello per scroll
+         * Creazione pannello scrollable
          */
-        //Creazione pannello per scroll con misure 1100x500
-        JScrollPane scroll = new JScrollPane(taskField);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setPreferredSize(new Dimension(1100,500));
-
-
+        //Creazione pannello scrollable dimensioni 1100x500
+        JScrollPane scrollPane = new JScrollPane(taskField);
+        scrollPane.setPreferredSize(new Dimension(1100, 500));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 
         /**
@@ -146,16 +139,17 @@ public class Finestra extends JFrame{                                           
 
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
-        frame.getContentPane().add(BorderLayout.CENTER, scroll);
+        frame.getContentPane().add(BorderLayout.CENTER, scrollPane);
 
         frame.setVisible (true);                                                       //
-                                                                                                                        // Impostazione del campo modificabile
+        // Impostazione del campo modificabile
+
 
 
 
         frame.setVisible (true);
 
-
+        return this;
 
 
     }
