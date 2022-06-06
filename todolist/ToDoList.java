@@ -13,11 +13,14 @@ import javax.swing.*;
 public class ToDoList {
     public static void main(String[] args) throws IOException {
 
-        Utente utente = new Utente();
 
+        //Finestra                                                                                                      //Creata classe finestra con all'interno tutta la parte grafica
+        Finestra fin = new Finestra();
+        fin.usaFrame();
 
 
         //Parte funzionale
+        Utente utente = new Utente();
         Scanner sc = new Scanner(System.in);
         String cmd = "";
         while (true){
