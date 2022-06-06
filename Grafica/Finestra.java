@@ -7,7 +7,6 @@ import mainclasses.Utente;
 
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -39,7 +38,7 @@ public class Finestra extends JFrame{                                           
         frame.setTitle("ToDo_List");                                                                                    // Set del titolo dell'applicazione: "ToDo_List"
         frame.setResizable(false);                                                                                      // Impostazione di non modifica della grandezza del frame                                               // Impostazione del font dell'applicazione
 
-        ImageIcon image = new ImageIcon("Grafica\\Immagini\\TodoTest.png");                                      // Selezione file dell'icona dall'applicazione
+        ImageIcon image = new ImageIcon("Grafica\\Immagini\\ToDo_Icon.png");                                      // Selezione file dell'icona dall'applicazione
         frame.setIconImage(image.getImage());                                                                           // Set dell'icona via path
 
         frame.setUndecorated ( true );                                                                                  // Impostazioni di decorazione
@@ -53,6 +52,8 @@ public class Finestra extends JFrame{                                           
 
         try{
             UIManager.setLookAndFeel(new FlatDarkLaf () );
+            UIManager.put("JFrame.activeTitleBackground", (new Color(238,148,121)));
+
         }
         catch (Exception e){
             e.printStackTrace ();
@@ -82,16 +83,14 @@ public class Finestra extends JFrame{                                           
         dataTask.setFont(new Font("Arial", Font.PLAIN, 15));
 
 
-
-
         /**
          * Pulsanti
          */
 
         JPanel posizionePulsanti = new JPanel();                                                                        // Creazione dei pulsanti
         JButton bottoneTask = new JButton("Crea Task");                                                             // Creazione bottone "Crea Task"
-        bottoneTask.setFont(new Font("Arial", Font.PLAIN, 13));
-        bottoneTask.setBackground(new Color(100,20,200));
+        bottoneTask.setFont(new Font("Arial", Font.BOLD, 18));
+        bottoneTask.setBackground(new Color(15,124,145));
         bottoneTask.setForeground(Color.white);
         bottoneTask.addActionListener(new ActionListener() {
             @Override
@@ -106,8 +105,8 @@ public class Finestra extends JFrame{                                           
         });
 
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                // Creazione bottone "Modifica Task"
-        bottoneModificaTask.setFont(new Font("Arial", Font.PLAIN, 13));
-        bottoneModificaTask.setBackground(new Color(100,20,200));
+        bottoneModificaTask.setFont(new Font("Arial", Font.BOLD, 18));
+        bottoneModificaTask.setBackground(new Color(15,124,145));
         bottoneModificaTask.setForeground(Color.white);
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
         posizionePulsanti.add(bottoneModificaTask);
@@ -117,11 +116,10 @@ public class Finestra extends JFrame{                                           
          * Lista Task
          */
 
-
         JTextArea taskField = new JTextArea(utente.toStringGUI(),25,25);
-        Font arial = new Font("Arial", Font.BOLD, 16);
+        Font arial = new Font("Arial", Font.PLAIN, 16);
         taskField.setFont(arial);
-        taskField.setBackground(new Color(255,157,123));
+        taskField.setBackground(new Color(238,148,121));
         taskField.setForeground(Color.black);
         taskField.setEditable(false);
 
@@ -148,22 +146,14 @@ public class Finestra extends JFrame{                                           
         pannelloInserimento.add(periodicitaTask);
 
 
-
-
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
         frame.getContentPane().add(BorderLayout.CENTER, scrollPane);
 
-        frame.setVisible (true);                                                       //
-        // Impostazione del campo modificabile
-
-
-
-
         frame.setVisible (true);
 
-        return this;
 
+        return this;
 
     }
 }
