@@ -3,6 +3,7 @@ package Grafica;
 
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import mainclasses.Task;
 import mainclasses.Utente;
 
 
@@ -49,6 +50,7 @@ public class Finestra extends JFrame{                                           
 
         JPanel panel = new JPanel ();
         frame.setContentPane ( panel );
+
 
         try                                                                                                             // Implementazione del tema "FlatDarkLaf"
         {
@@ -115,6 +117,17 @@ public class Finestra extends JFrame{                                           
         taskField.setBackground(Color.GRAY);
         taskField.setEditable(false);
 
+        /**
+         * Creazione pannello per scroll
+         */
+        //Creazione pannello per scroll con misure 1100x500
+        JScrollPane scroll = new JScrollPane(taskField);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setPreferredSize(new Dimension(1100,500));
+
+
+
 
         /**
          * Inserimento componenti nel Frame
@@ -133,7 +146,7 @@ public class Finestra extends JFrame{                                           
 
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
         frame.getContentPane().add(BorderLayout.SOUTH, posizionePulsanti);
-        frame.getContentPane().add(BorderLayout.CENTER, taskField);
+        frame.getContentPane().add(BorderLayout.CENTER, scroll);
 
         frame.setVisible (true);                                                       //
                                                                                                                         // Impostazione del campo modificabile
