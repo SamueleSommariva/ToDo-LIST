@@ -73,6 +73,10 @@ public class Finestra extends JFrame{                                           
         promtTitolo.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel promtData = new JLabel("Data Task");
         promtData.setFont(new Font("Arial", Font.BOLD, 20));
+        JButton calendario = new JButton("Calendario");
+        calendario.setFont(new Font("Arial", Font.BOLD, 18));
+        calendario.setBackground(new Color(15,124,145));
+        calendario.setForeground(Color.white);
         JLabel promtPeriodicita = new JLabel("Periodicita Task");
         promtPeriodicita.setFont(new Font("Arial", Font.BOLD, 20));
         JTextField titoloTask = new JTextField(25);
@@ -101,6 +105,15 @@ public class Finestra extends JFrame{                                           
                 Finestra f = new Finestra().usaFrame(utente);
                 frame.dispose();
 
+            }
+        });
+
+        //apertura della finestra calendario
+        calendario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Calendario calendario = new Calendario();
+                calendario.usaCalendario(utente);
             }
         });
 
@@ -142,6 +155,7 @@ public class Finestra extends JFrame{                                           
         pannelloInserimento.add(titoloTask);
         pannelloInserimento.add(promtData);
         pannelloInserimento.add(dataTask);
+        //pannelloInserimento.add(calendario);                                                                          // Commento da rimuovere non appena il calendario sarà l'input della data per la task
         pannelloInserimento.add(promtPeriodicita);
         pannelloInserimento.add(periodicitaTask);
 

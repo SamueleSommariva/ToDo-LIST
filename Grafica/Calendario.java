@@ -1,6 +1,7 @@
 package Grafica;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import mainclasses.Utente;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -8,7 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Calendario {
+
+public class Calendario extends JFrame {
 
     static JLabel label;
     static JButton preButton, nextButton;
@@ -21,7 +23,7 @@ public class Calendario {
     static JPanel panel;
     static int realYear, realMonth, realDay, currentYear, currentMonth;
 
-    public static void main(String args[]) {
+    public Calendario usaCalendario(Utente utente){
         //Look and feel
         try{
             UIManager.setLookAndFeel(new FlatDarkLaf() );
@@ -29,15 +31,18 @@ public class Calendario {
         catch (Exception e){
             e.printStackTrace ();
         }
-        //Icon
-        //ImageIcon icon = new ImageIcon("icon.png");                                                                   //  <--- Quando l'icona è pronta inserire qui
+
 
         //Prepare frame
         frame = new JFrame();
-        frame.setSize(330, 375);           //330, 375 -It's possible to change the size of the frame to fit the hour of the task
+        frame.setSize(400, 400);           //400, 400 -It's possible to change the size of the frame to fit the hour of the task
         pane = frame.getContentPane();
         pane.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);     //This only close itself because it's a sub-frame
+
+        //Icon
+        ImageIcon image = new ImageIcon("Grafica\\Immagini\\Calendar_Icon.png");
+        frame.setIconImage(image.getImage());
 
         //Create controls
         label = new JLabel("gennaio");
@@ -90,7 +95,7 @@ public class Calendario {
         currentYear = realYear;
 
         //Add headers
-        String[] headers = {"Dom","Lun", "Mar", "Mer", "Gio", "Ven", "Sab"};
+        String[] headers = {"Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"};
         for (int i = 0; i < 7; i++) {
             mtblCalendar.addColumn(headers[i]);
         }
@@ -113,12 +118,13 @@ public class Calendario {
 
         //Set slide year + set all the year usable(+100 -100 current year)
         for (int i = realYear - 100; i <= realYear + 100; i++) {
-            System.out.println(String.valueOf(i));
             combo.addItem(String.valueOf(i));
         }
 
         //Refresh calendar
         refreshCalendar(realMonth, realYear);
+
+        return  this;
     }
 
     public static void refreshCalendar(int month, int year) {
@@ -155,7 +161,7 @@ public class Calendario {
         for (int i = 1; i <= nod; i++) {
             int row = (i + som - 2) / 7;
             int column = (i + som - 2) % 7;
-            mtblCalendar.setValueAt(1, row, column);
+            mtblCalendar.setValueAt(i, row, column);
         }
 
         table.setDefaultRenderer(table.getColumnClass(0), new tblCalendarRenderer());
@@ -167,13 +173,13 @@ public class Calendario {
                                                        boolean selected, boolean focused, int row, int column) {
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
             if (column == 0 || column == 6) {
-                setBackground(new Color(255, 220, 220));                                                        //Set background color for weekends
+                setBackground(new Color(238,148,121));                                                        //Set background color for weekends
             } else {
                 setBackground(new Color(255, 255, 255));                                                        //Set background color for weekdays
             }
             if (value != null) {
                 if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear) {
-                    setBackground(new Color(220, 220, 255));
+                    setBackground(new Color(15,124,145));
                 }
             }
             setBorder(null);

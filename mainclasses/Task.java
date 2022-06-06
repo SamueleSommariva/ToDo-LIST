@@ -193,7 +193,7 @@ public class Task {
                                 (descrizione.length() < 11 ? "\t\t\t" :
                                         (descrizione.length() < 15 ? "\t\t" : "\t"))))) +
                 dataOra + "\t" +
-                ((this.periodicita.equals("00/00/00/0000")) ? "NO\t" : periodicita) + "\t\t\t" +
+                ((this.periodicita.equals("00/00/00/0000")) ? "\tNO\t" : periodicita) + "\t\t" +
                 (completata ? "SI" : "NO");
     }
 
@@ -207,7 +207,7 @@ public class Task {
                                                         (descrizione.length() < 28 ? "" :
                                                                 (descrizione.length() < 32 ? "\t" : "\t")))))))) +
                 dataOra + "\t" +
-                (periodicita == "00/00/00/0000" ? "NO" : periodicita) + "\t\t\t" +
+                ((this.periodicita.equals("00/00/00/0000")) ? "\tNO" : "\t" + periodicita) + "\t\t\t" +
                 (completata ? "SI" : "NO");
     }
 }
