@@ -138,7 +138,7 @@ public class Calendario extends JFrame {
             hour.addItem(String.valueOf(i));
         }
 
-        //Set slide year to current year
+        //Set slide minute to current year
         for(int i = 0; i <= 60; i++ ){
             minute.addItem(String.valueOf(i));
         }
