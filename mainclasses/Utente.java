@@ -59,44 +59,54 @@ public class Utente {
                 case "edit":
                     switch (cmd[1]){
                             case "desc":
-                                taskList.set(new Integer(cmd[1].toString()), 
-                                        new Task(  cmd[2],
-                                        Task.ora(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
-                                        Task.giorno(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
-                                        Task.mese(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
-                                        Task.anno(taskList.get(new Integer(cmd[1].toString())).getDataOra()),
-                                        taskList.get(new Integer(cmd[1].toString())).getPeriodicita()));
+                                taskList.set(Integer.parseInt(cmd[2])-1,
+                                        new Task(  cmd[3],
+                                        Task.ora(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                        Task.giorno(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                        Task.mese(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                        Task.anno(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                        taskList.get(Integer.parseInt(cmd[2])-1).getPeriodicita()));
                                 break;
                             case "date":
-                                taskList.set(new Integer(cmd[1].toString()), 
-                                        new Task( taskList.get(new Integer(cmd[1].toString())).getDescrizione(),
-                                        Task.ora(cmd[2]),
-                                        Task.giorno(cmd[2]),
-                                        Task.mese(cmd[2]),
-                                        Task.anno(cmd[2]),
-                                        taskList.get(new Integer(cmd[1].toString())).getPeriodicita()));
+                                taskList.set(Integer.parseInt(cmd[2])-1,
+                                        new Task( taskList.get(Integer.parseInt(cmd[2])-1).getDescrizione(),
+                                        Task.ora(cmd[3]),
+                                        Task.giorno(cmd[3]),
+                                        Task.mese(cmd[3]),
+                                        Task.anno(cmd[3]),
+                                        taskList.get(Integer.parseInt(cmd[2])-1).getPeriodicita()));
+                                break;
+                            case "per":
+                                int a = 0;
+                                taskList.set(Integer.parseInt(cmd[2])-1,
+                                        new Task( taskList.get(Integer.parseInt(cmd[2])-1).getDescrizione(),
+                                                Task.ora(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                                Task.giorno(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                                Task.mese(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                                Task.anno(taskList.get(Integer.parseInt(cmd[2])-1).getDataOra()),
+                                                cmd[3]));
                                 break;
                             default:
                                 System.out.println("\nInvalid command or params...\nType help for more.");
                     }
                     break;
                 case "complete":
-                    Task t = taskList.get(new Integer(cmd[1].toString())-1);
+                    Task t = taskList.get(Integer.parseInt(cmd[1])-1);
                     t.completata();
-                    taskList.set(new Integer(cmd[1].toString())-1, t);
+                    taskList.set(Integer.parseInt(cmd[1])-1, t);
                     System.out.println("Completed Task N: " + cmd[1]);
                     break;
                 case "help":
                     System.out.println("INFO COMMANDS:\n"
                             + "help\t\t" +        "Info comandi.\n"
                             + "show\t\t" +        "Stampa la lista di tutte le task salvate.\n"
-                            + "mktask\t\t" +      "Crea task *NON INSERIRE SPAZI* es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
-                            + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa]\n"
-                            + "complete\t" +     "Completare/eseguire la task N (show)\n"
+                            + "mktask\t\t" +      "Crea task >NON INSERIRE SPAZI< es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
+                            + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa][per: periodicitá hh/gg/mm/aaa]\n"
+                            + "complete\t" +      "Completare/eseguire la task N (show)\n"
                             + "rm\t\t\t" +        "Elimina la task N (show)\n");
                     break;
                 case "rm":
-                    taskList.remove(new Integer(cmd[1].toString())-1);
+                    taskList.remove(Integer.parseInt(cmd[1])-1);
                     System.out.println("Deleted Task N: " + cmd[1]);
                     break;
                 case "":
