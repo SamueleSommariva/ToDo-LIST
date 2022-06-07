@@ -1,4 +1,3 @@
-
 package Grafica;
 
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -21,8 +20,11 @@ public class Calendario extends JFrame {
     static DefaultTableModel mtblCalendar;
     static JScrollPane scroll;
     static JPanel panel;
-    static int realYear, realMonth, realDay, currentYear, currentMonth;
-    static JComboBox hour, minute;
+    static int realYear, realMonth, realDay, realHour,  currentYear, currentMonth;
+
+    static int HourSlider, DaySlider, MonthSlider, YearSlider;
+
+    static JComboBox hour, day, month, year;
 
 
     public Calendario usaCalendario(Utente utente){
@@ -37,14 +39,10 @@ public class Calendario extends JFrame {
 
         //Prepare frame
         frame = new JFrame();
-        frame.setSize(330, 400);           //330, 375 -It's possible to change the size of the frame to fit the hour of the task
+        frame.setSize(328, 395);           //330, 375 -It's possible to change the size of the frame to fit the hour of the task
         pane = frame.getContentPane();
         pane.setLayout(null);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        //creazione bottone per invio
-        JButton btnInvio = new JButton("Invio");
-        frame.getContentPane().add(BorderLayout.SOUTH ,btnInvio);
-        frame.getContentPane().add(btnInvio);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);     //This only close itself because it's a sub-frame
 
         //Icon
         ImageIcon image = new ImageIcon("Grafica\\Immagini\\Calendar_Icon.png");
@@ -64,7 +62,10 @@ public class Calendario extends JFrame {
         scroll = new JScrollPane(table);
         panel = new JPanel(null);
         hour = new JComboBox();
-        minute = new JComboBox();
+        day = new JComboBox();
+        month = new JComboBox();
+        year = new JComboBox();
+
 
         //Set border
         panel.setBorder(BorderFactory.createTitledBorder("Calendario") );
@@ -74,6 +75,12 @@ public class Calendario extends JFrame {
         nextButton.addActionListener(new btnNext_Action() );
         combo.addActionListener(new cmbYear_Action() );
 
+        hour.addActionListener(new dateSlider() );
+        day.addActionListener(new dateSlider() );
+        month.addActionListener(new dateSlider() );
+        year.addActionListener(new dateSlider() );
+
+
         //Add controls to pane
         pane.add(panel);
         panel.add(label);
@@ -81,22 +88,28 @@ public class Calendario extends JFrame {
         panel.add(preButton);
         panel.add(nextButton);
         panel.add(scroll);
+
         panel.add(hour);
-        panel.add(minute);
+        panel.add(day);
+        panel.add(month);
+        panel.add(year);
 
 
 
         //Set bounds                                                                                                    //Change the size only if we won to have a better look/feel
-        panel.setBounds(0, 0, 350, 335);
+        panel.setBounds(0, 0, 320, 360);
         label.setBounds(160 - label.getPreferredSize().width / 2, 25, 100, 25);
         combo.setBounds(230, 309, 80, 20);      //(230, 305, 80, 20)                                  //(y = 309) because i want to have the year-box 2 pixels below the scroll-pane
         preButton.setBounds(10, 25, 60, 25);
         nextButton.setBounds(250, 25, 60, 25);
         scroll.setBounds(10, 52, 300, 255);                                                           //(height 255) only because I don't want to have a scroll bar + (y = 52) because i like it more
         //Hour/Minute of a task
-        hour.setBounds(50, 309, 40, 20);
-        minute.setBounds(10, 309, 40, 20);
-        btnInvio.setBounds(90, 309, 60, 20);
+        hour.setBounds(10, 332, 50, 20);
+        day.setBounds(62, 332, 50, 20);
+        month.setBounds(114, 332, 50, 20);
+        year.setBounds(166, 332, 80, 20);
+
+
 
 
 
@@ -104,9 +117,9 @@ public class Calendario extends JFrame {
         frame.setResizable(false);
         frame.setVisible(true);
 
-
         //Get real month/year
         GregorianCalendar cal = new GregorianCalendar();
+        realHour = cal.get(GregorianCalendar.HOUR);
         realDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
         realMonth = cal.get(GregorianCalendar.MONTH);
         realYear = cal.get(GregorianCalendar.YEAR);
@@ -118,6 +131,7 @@ public class Calendario extends JFrame {
         for (int i = 0; i < 7; i++) {
             mtblCalendar.addColumn(headers[i]);
         }
+
         table.getParent().setBackground(table.getBackground());
 
         //No resize/reorder
@@ -139,14 +153,51 @@ public class Calendario extends JFrame {
             combo.addItem(String.valueOf(i));
         }
 
-        //Set slide minute to current year
-        for(int i = 0; i <= 59; i++ ){
-            hour.addItem(String.valueOf(i));
+        //Set slide hour                                                                                       //----------------------------------------------------------
+        for(int i = 0; i <= 24; i++ ){
+            int hour_ = 0;
+            if(realHour + i < 24){
+                hour_ = realHour + i;
+            }else{
+                hour_ = 24;
+                i = 24;
+            }
+            hour.addItem(String.valueOf(hour_));
         }
 
-        //Set slide hour to current year
-        for(int i = 0; i <= 23; i++ ){
-            minute.addItem(String.valueOf(i));
+        //Set slide day
+
+        int MaxDEY = 0;
+        int d=0;
+        d = cal.get(GregorianCalendar.DAY_OF_MONTH);
+        for(int i = 0; i <= 31; i++ ){
+            System.out.println(cal.get(GregorianCalendar.MONTH));
+            //Switch case month
+            switch (d){
+                case 1: MaxDEY = 31;
+                        break;
+                case 2: if(true){
+
+                };
+            }
+
+
+
+            day.addItem(String.valueOf(realDay + i));
+        }
+
+        //Set slide month
+        for(int i = 0; i <= 12; i++ ){
+            month.addItem(String.valueOf(realMonth + i));
+
+        }
+        MonthSlider = (int) month.getPrototypeDisplayValue();
+        System.out.println(MonthSlider);
+
+        //Set slide year
+        for(int i = 0; i <= 10; i++ ){
+            //Get current year
+            year.addItem(String.valueOf(realYear + i));
         }
 
         //Refresh calendar
@@ -154,7 +205,6 @@ public class Calendario extends JFrame {
 
         return  this;
     }
-
 
     public static void refreshCalendar(int month, int year) {
         //Variables
@@ -174,9 +224,11 @@ public class Calendario extends JFrame {
         label.setBounds(160 - label.getPreferredSize().width / 2, 25, 180, 25);
         combo.setSelectedItem(String.valueOf(year));
 
+
+
         //Clear table
         for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
+             for (int j = 0; j < 7; j++) {
                 mtblCalendar.setValueAt(null, i, j);
             }
         }
@@ -190,26 +242,31 @@ public class Calendario extends JFrame {
         for (int i = 1; i <= nod; i++) {
             int row = (i + som - 2) / 7;
             int column = (i + som - 2) % 7;
+
             mtblCalendar.setValueAt(i, row, column);
         }
 
         table.setDefaultRenderer(table.getColumnClass(0), new tblCalendarRenderer());
     }
 
+    //get value scroller hour, day, month, year
+
+
+
+
     static class tblCalendarRenderer extends DefaultTableCellRenderer {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                                                        boolean selected, boolean focused, int row, int column) {
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-            if (column == 0) {
-                setBackground(new Color(238,148,121));                                                        //Set background color for weekends
+            if (column == 0 || column == 6) {
+                setBackground(new Color(238,148,121));                                                          //Set background color for weekends
             } else {
                 setBackground(new Color(255, 255, 255));                                                        //Set background color for weekdays
             }
             if (value != null) {
                 if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear) {
                     setBackground(new Color(15,124,145));
-                    setForeground(Color.white);
                 }
             }
             setBorder(null);
@@ -254,4 +311,20 @@ public class Calendario extends JFrame {
             }
         }
     }
+
+
+    static class dateSlider implements  ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            HourSlider = (int) hour.getPrototypeDisplayValue();
+            MonthSlider = (int) month.getPrototypeDisplayValue();
+            DaySlider = (int) day.getPrototypeDisplayValue();
+            YearSlider = (int) year.getPrototypeDisplayValue();
+        }
+    }
+
 }
+
+
+

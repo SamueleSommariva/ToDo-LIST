@@ -154,8 +154,8 @@ public class Finestra extends JFrame{                                           
         pannelloInserimento.add(promtTitolo);
         pannelloInserimento.add(titoloTask);
         pannelloInserimento.add(promtData);
-        //pannelloInserimento.add(dataTask);
-        pannelloInserimento.add(calendario);                                                                          // Commento da rimuovere non appena il calendario sarà l'input della data per la task
+        pannelloInserimento.add(dataTask);
+        //pannelloInserimento.add(calendario);                                                                          // Commento da rimuovere non appena il calendario sarà l'input della data per la task
         pannelloInserimento.add(promtPeriodicita);
         pannelloInserimento.add(periodicitaTask);
 
