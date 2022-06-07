@@ -292,10 +292,14 @@ public class Calendario extends JFrame {
             String mese_S =  month.getSelectedItem().toString();
             String anno_S =  year.getSelectedItem().toString();
             String ora_S = hour.getSelectedItem().toString();
-
-            String data_totale = ora_S +"\\" +giorno_S +"\\" + mese_S +"\\"+ anno_S;
+            String data_totale = ora_S +"/" +giorno_S +"/" + mese_S +"/"+ anno_S;
             System.out.println(data_totale);
 
+            //New finestra
+            Finestra f1 = new Finestra();
+            f1.data = data_totale;
+
+            frame.dispose();
 
         }
     }

@@ -16,7 +16,11 @@ import java.awt.event.WindowEvent;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
+    static String data ="Vuoto";
     Utente utente;
+
+    public Finestra() {
+    }
 
 
     public Finestra usaFrame(Utente utente){
@@ -100,7 +104,7 @@ public class Finestra extends JFrame{                                           
             @Override
             public void actionPerformed(ActionEvent e) {                                                                //<------------------------------------------------------------------------
                 utente.runCmd("mktask " + titoloTask.getText() + " " +
-                        dataTask.getText() + " " +
+                        data + " " +
                         periodicitaTask.getText());
                 Finestra f = new Finestra().usaFrame(utente);
                 frame.dispose();
