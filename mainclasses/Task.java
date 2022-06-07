@@ -198,14 +198,14 @@ public class Task {
     }
 
     public String toStringGUI() {
-        return  "       " + descrizione + (descrizione.length() < 4 ? "\t\t\t\t\t" :
-                (descrizione.length() < 8 ?"\t\t\t\t" :
+        return  "       " + descrizione + (descrizione.length() < 4 ? "\t" :
+                (descrizione.length() < 8 ?"\t" :
                         (descrizione.length() < 12 ? "\t\t\t" :
-                                (descrizione.length() < 16 ? "\t\t" :
-                                        (descrizione.length() < 20 ? "\t" :
-                                                (descrizione.length() < 24 ? "" :
-                                                        (descrizione.length() < 28 ? "" :
-                                                                (descrizione.length() < 32 ? "\t" : "\t")))))))) +
+                                (descrizione.length() < 16 ? "\t\t\t" :
+                                        (descrizione.length() < 20 ? "\t\t\t" :
+                                                (descrizione.length() < 24 ? "\t\t" :
+                                                        (descrizione.length() < 28 ? "\t\t" :
+                                                                (descrizione.length() < 32 ? "\t\t" : "\t\t")))))))) +
                 dataOra + "\t" +
                 ((this.periodicita.equals("00/00/00/0000")) ? "\tNO" : "\t" + periodicita) + "\t\t\t" +
                 (completata ? "SI" : "NO");
