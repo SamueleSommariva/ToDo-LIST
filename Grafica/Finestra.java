@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
     static String data ="NO";
-    static String dataPeriodica = "NO";
+    static String dataPeriodica = "00/00/00/0000";
     Utente utente;
 
     static boolean periodicita;

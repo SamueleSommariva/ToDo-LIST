@@ -159,6 +159,7 @@ public class Calendario extends JFrame {
 
         //Set slide day
         for(int i = 1; i <= 31; i++ ){
+
             day.addItem(String.valueOf(i));
         }
 
@@ -293,14 +294,16 @@ public class Calendario extends JFrame {
             String anno_S =  year.getSelectedItem().toString();
             String ora_S = hour.getSelectedItem().toString();
             String data_totale = ora_S +"/" +giorno_S +"/" + mese_S +"/"+ anno_S;
-            System.out.println(data_totale);
 
             //New finestra
             Finestra f1 = new Finestra();
             if(f1.periodicita == false){
                 f1.data = data_totale;
+                f1.dataPeriodica = "00/00/00/0000";
             }else {
+                data_totale = ora_S +"/" +giorno_S +"/" + mese_S +"/"+ "0000";
                 f1.dataPeriodica = data_totale;
+
                 f1.periodicita = false;
             }
 
