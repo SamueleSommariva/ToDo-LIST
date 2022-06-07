@@ -13,12 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
-    static String data ="Vuoto";
+    static String data ="NO";
+    static String dataPeriodica = "NO";
     Utente utente;
+
+    static boolean periodicita;
 
     public Finestra() {
     }
@@ -33,7 +35,7 @@ public class Finestra extends JFrame{                                           
             public void windowClosing(WindowEvent e){                                                                   //Salva e chiude
                 try {
                     utente.salvaTasks();
-                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }catch (Exception z){
                 }
             }
@@ -102,16 +104,12 @@ public class Finestra extends JFrame{                                           
         bottoneTask.setBackground(new Color(15,124,145));
         bottoneTask.setForeground(Color.white);
         bottoneTask.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {                                                                //<------------------------------------------------------------------------
                 utente.runCmd("mktask " + titoloTask.getText() + " " +
                         data + " " +
-                        periodicitaTask.getText());
-                try {
-                    utente.salvaTasks();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                        dataPeriodica + " ");
                 Finestra f = new Finestra().usaFrame(utente);
                 frame.dispose();
 
@@ -127,12 +125,27 @@ public class Finestra extends JFrame{                                           
             }
         });
 
+        JButton bottonePeriodicita = new JButton("Periodicità");                                                             // Creazione bottone "Crea Task"
+        bottonePeriodicita.setFont(new Font("Arial", Font.BOLD, 18));
+        bottonePeriodicita.setBackground(new Color(15,124,145));
+        bottonePeriodicita.setForeground(Color.white);
+        bottonePeriodicita.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                periodicita = true;
+                Calendario calendario = new Calendario();
+                calendario.usaCalendario(utente);
+            }
+        });
+
+
+
         JButton bottoneModificaTask = new JButton("Modifica Task");                                                // Creazione bottone "Modifica Task"
         bottoneModificaTask.setFont(new Font("Arial", Font.BOLD, 18));
         bottoneModificaTask.setBackground(new Color(15,124,145));
         bottoneModificaTask.setForeground(Color.white);
         posizionePulsanti.add(bottoneTask);                                                                             // Posizionamento dei bottoni al frame
-        posizionePulsanti.add(bottoneModificaTask);
+        //posizionePulsanti.add(bottoneModificaTask);
 
 
         /**
@@ -167,7 +180,8 @@ public class Finestra extends JFrame{                                           
         //pannelloInserimento.add(dataTask);
         pannelloInserimento.add(calendario);                                                                          // Commento da rimuovere non appena il calendario sarà l'input della data per la task
         pannelloInserimento.add(promtPeriodicita);
-        pannelloInserimento.add(periodicitaTask);
+        pannelloInserimento.add(bottonePeriodicita);
+        //pannelloInserimento.add(periodicitaTask);
 
 
         frame.getContentPane().add(BorderLayout.NORTH, pannelloInserimento);
