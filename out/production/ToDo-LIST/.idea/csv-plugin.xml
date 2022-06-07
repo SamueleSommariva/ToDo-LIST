@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\out\production\ToDo-LIST\Task.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
