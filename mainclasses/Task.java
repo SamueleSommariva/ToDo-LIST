@@ -193,7 +193,7 @@ public class Task {
                                 (descrizione.length() < 11 ? "\t\t\t" :
                                         (descrizione.length() < 15 ? "\t\t" : "\t"))))) +
                 dataOra + "\t" +
-                ((this.periodicita.equals("00/00/00/0000")) ? "\tNO\t" : periodicita) + "\t\t" +
+                ((this.periodicita.equals("00/00/00/0000")) ? "\tNO\t" : "\t" + periodicita) + "\t\t\t" +
                 (completata ? "SI" : "NO");
     }
 

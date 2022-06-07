@@ -103,9 +103,9 @@ public class Utente {
                             + "mktask\t\t" +      "Crea task >NON INSERIRE SPAZI< es singola:(mktask s desc hh/gg/mm/aaaa) periodica:(mktask desc hh/gg/mm/aaaa ph/pg/pm/pa).\n"
                             + "edit\t\t" +        "Modifica task N (show) parametri [desc: descrizione][date: dataOra hh/gg/mm/aaa][per: periodicitá hh/gg/mm/aaa]\n"
                             + "complete\t" +      "Completare/eseguire la task N (show)\n"
-                            + "rm\t\t\t" +        "Elimina la task N (show)\n");
+                            + "remove\t\t" +     "Elimina la task N (show)\n");
                     break;
-                case "rm":
+                case "remove":
                     taskList.remove(Integer.parseInt(cmd[1])-1);
                     System.out.println("Deleted Task N: " + cmd[1]);
                     break;
