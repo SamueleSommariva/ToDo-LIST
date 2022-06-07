@@ -202,7 +202,7 @@ public class Calendario extends JFrame {
 
         //Clear table
         for (int i = 0; i < 6; i++) {
-             for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < 7; j++) {
                 mtblCalendar.setValueAt(null, i, j);
             }
         }
@@ -297,7 +297,12 @@ public class Calendario extends JFrame {
 
             //New finestra
             Finestra f1 = new Finestra();
-            f1.data = data_totale;
+            if(f1.periodicita == false){
+                f1.data = data_totale;
+            }else {
+                f1.dataPeriodica = data_totale;
+                f1.periodicita = false;
+            }
 
             frame.dispose();
 
@@ -306,6 +311,3 @@ public class Calendario extends JFrame {
 
 
 }
-
-
-
