@@ -98,7 +98,7 @@ public class Finestra extends JFrame{                                           
         bottoneTask.setForeground(Color.white);
         bottoneTask.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                                                                //<------------------------------------------------------------------------
                 utente.runCmd("mktask " + titoloTask.getText() + " " +
                         dataTask.getText() + " " +
                         periodicitaTask.getText());

@@ -12,7 +12,7 @@ import java.util.*;
 public class Calendario extends JFrame {
 
     static JLabel label;
-    static JButton preButton, nextButton;
+    static JButton preButton, nextButton, pulsanteData;
     static JTable table;
     static JComboBox combo;
     static JFrame frame;
@@ -21,8 +21,6 @@ public class Calendario extends JFrame {
     static JScrollPane scroll;
     static JPanel panel;
     static int realYear, realMonth, realDay, realHour,  currentYear, currentMonth;
-
-    static int HourSlider, DaySlider, MonthSlider, YearSlider;
 
     static JComboBox hour, day, month, year;
 
@@ -66,6 +64,8 @@ public class Calendario extends JFrame {
         month = new JComboBox();
         year = new JComboBox();
 
+        pulsanteData = new JButton("Ins");
+
 
         //Set border
         panel.setBorder(BorderFactory.createTitledBorder("Calendario") );
@@ -74,12 +74,7 @@ public class Calendario extends JFrame {
         preButton.addActionListener(new btnPrev_Action() );
         nextButton.addActionListener(new btnNext_Action() );
         combo.addActionListener(new cmbYear_Action() );
-
-        hour.addActionListener(new dateSlider() );
-        day.addActionListener(new dateSlider() );
-        month.addActionListener(new dateSlider() );
-        year.addActionListener(new dateSlider() );
-
+        pulsanteData.addActionListener(new pulsante_data());
 
         //Add controls to pane
         pane.add(panel);
@@ -94,6 +89,9 @@ public class Calendario extends JFrame {
         panel.add(month);
         panel.add(year);
 
+        panel.add(pulsanteData);
+
+
 
 
         //Set bounds                                                                                                    //Change the size only if we won to have a better look/feel
@@ -107,7 +105,8 @@ public class Calendario extends JFrame {
         hour.setBounds(10, 332, 50, 20);
         day.setBounds(62, 332, 50, 20);
         month.setBounds(114, 332, 50, 20);
-        year.setBounds(166, 332, 80, 20);
+        year.setBounds(166, 332, 65, 20);
+        pulsanteData.setBounds(248, 332, 60, 20);
 
 
 
@@ -154,45 +153,20 @@ public class Calendario extends JFrame {
         }
 
         //Set slide hour                                                                                       //----------------------------------------------------------
-        for(int i = 0; i <= 24; i++ ){
-            int hour_ = 0;
-            if(realHour + i < 24){
-                hour_ = realHour + i;
-            }else{
-                hour_ = 24;
-                i = 24;
-            }
-            hour.addItem(String.valueOf(hour_));
+        for(int i = 0; i <= 23; i++ ){
+            hour.addItem(String.valueOf(i));
         }
 
         //Set slide day
-
-        int MaxDEY = 0;
-        int d=0;
-        d = cal.get(GregorianCalendar.DAY_OF_MONTH);
-        for(int i = 0; i <= 31; i++ ){
-            System.out.println(cal.get(GregorianCalendar.MONTH));
-            //Switch case month
-            switch (d){
-                case 1: MaxDEY = 31;
-                        break;
-                case 2: if(true){
-
-                };
-            }
-
-
-
-            day.addItem(String.valueOf(realDay + i));
+        for(int i = 1; i <= 31; i++ ){
+            day.addItem(String.valueOf(i));
         }
 
         //Set slide month
-        for(int i = 0; i <= 12; i++ ){
-            month.addItem(String.valueOf(realMonth + i));
+        for(int i = 1; i <= 12; i++ ){
+            month.addItem(String.valueOf(i));
 
         }
-        MonthSlider = (int) month.getPrototypeDisplayValue();
-        System.out.println(MonthSlider);
 
         //Set slide year
         for(int i = 0; i <= 10; i++ ){
@@ -312,17 +286,20 @@ public class Calendario extends JFrame {
         }
     }
 
-
-    static class dateSlider implements  ActionListener{
-
-        @Override
+    static class pulsante_data implements  ActionListener {
         public void actionPerformed(ActionEvent e) {
-            HourSlider = (int) hour.getPrototypeDisplayValue();
-            MonthSlider = (int) month.getPrototypeDisplayValue();
-            DaySlider = (int) day.getPrototypeDisplayValue();
-            YearSlider = (int) year.getPrototypeDisplayValue();
+            String giorno_S = day.getSelectedItem().toString();
+            String mese_S =  month.getSelectedItem().toString();
+            String anno_S =  year.getSelectedItem().toString();
+            String ora_S = hour.getSelectedItem().toString();
+
+            String data_totale = ora_S +"\\" +giorno_S +"\\" + mese_S +"\\"+ anno_S;
+            System.out.println(data_totale);
+
+
         }
     }
+
 
 }
 
