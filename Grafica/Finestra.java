@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class Finestra extends JFrame{                                                                                                 // Creazione classe finestra per la creazione del frame
 
@@ -32,7 +33,7 @@ public class Finestra extends JFrame{                                           
             public void windowClosing(WindowEvent e){                                                                   //Salva e chiude
                 try {
                     utente.salvaTasks();
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 }catch (Exception z){
                 }
             }
@@ -106,6 +107,11 @@ public class Finestra extends JFrame{                                           
                 utente.runCmd("mktask " + titoloTask.getText() + " " +
                         data + " " +
                         periodicitaTask.getText());
+                try {
+                    utente.salvaTasks();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 Finestra f = new Finestra().usaFrame(utente);
                 frame.dispose();
 

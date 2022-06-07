@@ -198,8 +198,8 @@ public class Task {
     }
 
     public String toStringGUI() {
-        return  "       " + descrizione + (descrizione.length() < 4 ? "\t" :
-                (descrizione.length() < 8 ?"\t" :
+        return  "       " + descrizione + (descrizione.length() < 4 ? "\t\t\t\t" :
+                (descrizione.length() < 8 ?"\t\t\t\t" :
                         (descrizione.length() < 12 ? "\t\t\t" :
                                 (descrizione.length() < 16 ? "\t\t\t" :
                                         (descrizione.length() < 20 ? "\t\t\t" :

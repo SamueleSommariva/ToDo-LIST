@@ -117,7 +117,7 @@ public class Utente {
 
             }
         }catch(Exception e){
-            System.err.println(e + "\nInvalid command or params...\nType help for more.");
+            System.out.println(e + "\nInvalid command or params...\nType help for more.");
         }
         
     }
